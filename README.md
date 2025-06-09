@@ -64,3 +64,4 @@
 - `config` (4.0.0) - アプリケーション設定
 - `pry-byebug`（開発用）
 - `MiniMagick` - 画像生成
+- 
