@@ -1,0 +1,10 @@
+<!-- app/views/shared/_header.html.erb -->
+<header>
+  <% if user_signed_in? %>
+    <%= link_to "記録する", "#" %>
+    <%= link_to "ログアウト", "#" %>
+  <% else %>
+    <%= link_to "会員登録", "#" %>
+    <%= link_to "ログイン", "#" %>
+  <% end %>
+</header>
