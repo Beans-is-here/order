@@ -1,0 +1,28 @@
+ja:
+  helpers:
+    submit:
+      create: 
+      submit: 
+      update: 
+    label:
+      email: メールアドレス
+      password: パスワード
+  devise:
+    sessions:
+      new:
+        sign_in: "ログイン"
+    registrations:
+      new:
+        sign_up: "ユーザー登録"
+
+
+
+  users:
+    new:
+      title: ユーザー登録
+      to_login_page: ログインページへ
+  header:
+    sign_in: ログイン
+    sign_out: ログアウト
+    sign_up: ユーザー登録
+    record: 記録する
