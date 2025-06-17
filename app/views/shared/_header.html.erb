@@ -6,11 +6,13 @@
       </h1>
       <div class="space-x4">
         <% if user_signed_in? %>
-          <%= link_to "記録する", "#", class: "bg-amber-500 text-white font-normal py-2 px-4 rounded hover:bg-orange-300 transition" %>
-          <%= link_to "ログアウト", "#", class: "bg-amber-500 text-white font-normal py-2 px-4 rounded hover:bg-orange-300 transition" %>
+          <%= link_to "記録する", "#", class: "bg-amber-500 text-white font-normal py-2 px-4 border border-white-400 rounded hover:bg-orange-300 transition" %>
+          <%= form_with url: destroy_user_session_path, method: :delete, class: "inline" do %>
+            <%= button_tag "ログアウト", type: "submit", class: "bg-amber-500 text-white font-normal py-2 px-4 border border-white-400 rounded hover:bg-orange-300 transition inline-block align-middle leading-tight" %>
+          <% end %>
         <% else %>
-          <%= link_to "会員登録", "#", class: "bg-amber-500 text-white font-normal py-2 px-4 border border-white-400 rounded hover:bg-orange-300 transition" %>
-          <%= link_to "ログイン", "#", class: "bg-amber-500 text-white font-normal py-2 px-4 border border-white-400 rounded hover:bg-orange-300 transition" %>
+          <%= link_to "会員登録", new_user_registration_path, class: "bg-amber-500 text-white font-normal py-2 px-4 border border-white-400 rounded hover:bg-orange-300 transition" %>
+          <%= link_to "ログイン", new_user_session_path, class: "bg-amber-500 text-white font-normal py-2 px-4 border border-white-400 rounded hover:bg-orange-300 transition" %>
         <% end %>
       </div>
     </div>
