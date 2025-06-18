@@ -1,0 +1,10 @@
+ja:
+  devise:
+    sessions:
+      new:
+        sign_in_title: "ログイン"
+        sign_in_button: "ログインする"
+    registrations:
+      new:
+        sign_up_title: "ユーザー登録"
+        sign_up_button: "登録する"

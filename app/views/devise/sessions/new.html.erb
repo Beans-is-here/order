@@ -1,16 +1,16 @@
 <div class="w-full max-w-lg mx-auto">
   <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-    <h2 class="text-3xl font-bold mb-6 text-center"><%= t("devise.sessions.new.sign_in") %></h2>
+    <h2 class="text-3xl font-bold mb-6 text-center"><%= t("devise.sessions.new.sign_in_title") %></h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="mb-4">
         <%= f.label :email, class: "block text-gray-700 text-base font-bold mb-2" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" %>
       </div>
 
       <div class="field">
         <%= f.label :password, class: "block text-gray-700 text-base font-bold mb-2" %>
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" %>
       </div>
 
       <% if devise_mapping.rememberable? %>
@@ -21,7 +21,7 @@
       <% end %>
 
       <div class="flex items-center justify-center">
-        <%= f.submit t("devise.sessions.new.sign_in"), class: "bg-amber-500 hover:bg-orange-300 text-white font-bold py-2 px-5 rounded focus:outline-none" %>
+        <%= f.submit t("devise.sessions.new.sign_in_button"), class: "bg-amber-500 hover:bg-orange-300 text-white font-bold py-2 px-5 rounded focus:outline-none" %>
       </div>
     <% end %>
 

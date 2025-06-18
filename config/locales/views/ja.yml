@@ -7,16 +7,6 @@ ja:
     label:
       email: メールアドレス
       password: パスワード
-  devise:
-    sessions:
-      new:
-        sign_in: "ログイン"
-    registrations:
-      new:
-        sign_up: "ユーザー登録"
-
-
-
   users:
     new:
       title: ユーザー登録
