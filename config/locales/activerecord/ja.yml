@@ -4,7 +4,8 @@ ja:
       users: ユーザー
     attributes:
       user:
-        name: 名前
+      #devise
+        name: ニックネーム
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認

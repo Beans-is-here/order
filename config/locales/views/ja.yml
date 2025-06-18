@@ -7,18 +7,6 @@ ja:
     label:
       email: メールアドレス
       password: パスワード
-  devise:
-    sessions:
-      new:
-        sign_in: "ログイン"
-    registrations:
-      new:
-        sign_up: "ユーザー登録"
-  errors:
-    messages:
-      not_saved: "%{count} 件のエラーが発生しています。"
-
-
   users:
     new:
       title: ユーザー登録
