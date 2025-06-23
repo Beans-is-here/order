@@ -1,0 +1,9 @@
+<% if orders.any? %>
+  <div class="grid grid-cols-1 gap-y-4 px-8">
+    <% orders.each do |order| %>
+      <%= render partial: "orders/card", locals: { order: order } %>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-gray-500 text-center">履歴がありません。</p>
+<% end %>
