@@ -34,4 +34,8 @@ class OrdersController < ApplicationController
       end
     end
   end
+
+  def new
+    @order = Order.new
+  end
 end
