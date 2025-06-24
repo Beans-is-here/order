@@ -22,6 +22,7 @@ ja:
       as_interested_menu: "気になるメニューとして登録"
       store: "店名"
       menu: "メニュー"
-      review: "評価"
+      rating: "評価"
       memo: "ひとことメモ"
+      memo_limit: "40字以内"
       create_button: "登録する"
