@@ -6,7 +6,7 @@
       </h1>
       <div class="space-x4">
         <% if user_signed_in? %>
-          <%= link_to t("header.record"), "#", class: "bg-amber-500 text-white font-normal py-2 px-4 border border-white-400 rounded hover:bg-orange-300 transition" %>
+          <%= link_to t("header.record"), new_order_path, class: "bg-amber-500 text-white font-normal py-2 px-4 border border-white-400 rounded hover:bg-orange-300 transition" %>
           <%= form_with url: destroy_user_session_path, method: :delete, class: "inline" do %>
             <%= button_tag t("header.sign_out"), type: "submit", class: "bg-amber-500 text-white font-normal py-2 px-4 border border-white-400 rounded hover:bg-orange-300 transition inline-block align-middle leading-tight" %>
           <% end %>
