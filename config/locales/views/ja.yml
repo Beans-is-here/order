@@ -16,3 +16,12 @@ ja:
     sign_out: ログアウト
     sign_up: ユーザー登録
     record: 記録する
+  orders:
+    new:
+      as_ordered_menu: "注文したメニューとして登録"
+      as_interested_menu: "気になるメニューとして登録"
+      store: "店名"
+      menu: "メニュー"
+      review: "評価"
+      memo: "ひとことメモ"
+      create_button: "登録する"
