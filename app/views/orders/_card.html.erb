@@ -6,7 +6,7 @@
       <!-- 左に画像(w-32 or w-40) -->
     <div class="w-32 h-full mr-4 flex-shrink-0">
       <!-- (要)defaultとuploadを用意 -->
-      <%= image_tag(order.menu.image_url || "order_placeholder.png", class: "object-cover w-full h-full rounded mb-2") %>
+      <%= image_tag(order.menu.image_url_url.present? ? order.menu.image_url.url : "order_placeholder.png", class: "object-cover w-full h-full rounded mb-2") %>
     </div>
       <!-- (要)店名やメニュー名の折り返し等への配慮 -->
       <!-- 右側 -->
