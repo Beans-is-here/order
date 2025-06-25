@@ -61,6 +61,17 @@
       </div>
     </div>
 
+    <div data-controller="image-preview">
+      <% f.label :image_url %>
+      <%= f.file_field :image_url, 
+            data: { 
+              image_preview_target: "input", 
+              action: "image-preview#previewImage"
+            },
+            class: 'form-control' %>
+      <img data-image-preview-target="preview" class="w-24 h-24 mt-2" />
+    </div>
+
     <div class="md:flex md:items-center">
       <div class="md:w-1/3"></div>
       <div class="md:w-2/3">

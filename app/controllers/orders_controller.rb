@@ -67,7 +67,14 @@ class OrdersController < ApplicationController
         )
       end
 
-      puts "bedore_redirect"
+      if params[:order][:image_url].present?
+        Menu.image_url.create!(
+            user: current_user,
+            menu: menu,
+            image_url: params[:order][:image_url]
+        )
+      end
+
       redirect_to orders_path, success: t('defaults.flash_message.created', item: Order.model_name.human)
     rescue ActiveRecord::RecordInvalid => e
         puts "err"
