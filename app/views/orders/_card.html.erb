@@ -5,7 +5,6 @@
   <div class="h-full flex items-start p-2 rounded space-x-4">
       <!-- 左に画像(w-32 or w-40) -->
     <div class="w-32 h-full mr-4 flex-shrink-0">
-      <!-- (要)defaultとuploadを用意 -->
       <%= image_tag(order.menu.image_url_url.present? ? order.menu.image_url.url : "order_placeholder.png", class: "object-cover w-full h-full rounded mb-2") %>
     </div>
       <!-- (要)店名やメニュー名の折り返し等への配慮 -->
@@ -13,24 +12,30 @@
     <div class="flex-1 flex flex-col justify-between h-full">
       <div class="flex items-start mb-2">
       <!-- store, menu -->
-        <div class="w-1/3 pr-4 text-xl text-gray-700 font-normal truncate mt-2">
+        <div class="w-2/3 pr-4 text-xl text-gray-700 font-normal truncate mt-2">
           <%= order.menu.store.name %>
         </div>
 
         <div class="w-2/3 text-xl text-gray-700 font-normal truncate">
           <%= order.menu.name %>
-        </div>  
-      </div>
-      
-      <% if order.memo.present? %>
-      <div class="text-base text-gray-500 italic mb-3">
-        メモ: <%= order.memo %>
-      </div>
-      <% end %>
+        </div>
 
-      <div class="text-sm text-gray-600 mb-2">
-        注文日: <%= l(order.ordered_at, format: :short) %>
-      </div>  
+        <% review = order.menu.reviews.find_by(user: current_user) %>
+        <% if review.present? %>
+          <div class="w-1/3 text-xl text-gray-700 font-normal truncate">
+            <%= '★' * review.rating %>
+        </div>
+      <% end %>
     </div>
+
+    <% if order.memo.present? %>
+    <div class="text-base text-gray-500 italic mb-3">
+      メモ: <%= order.memo %>
+    </div>
+    <% end %>
+
+    <div class="text-sm text-gray-600 mb-2">
+      注文日: <%= l(order.ordered_at, format: :short) %>
+    </div> 
   </div>
 </div>
