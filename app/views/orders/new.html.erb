@@ -1,7 +1,7 @@
 <div class="w-full max-w-lg mx-auto">
   <h2 class="text-3xl font-bold mb-6 text-left"><%= t("メニュー登録") %></h2>
 
-  <%= form_with model: @order, class: "new_order" do |f| %>
+  <%= form_with model: @order, class: "new_order", local: true, data: { turbo: false }  do |f| %>
     <div class="flex flex-wrap mb-6">
       <div class="flex items-center me-4">
         <%= f.radio_button :ordered, true, id: "ordered_true" %>

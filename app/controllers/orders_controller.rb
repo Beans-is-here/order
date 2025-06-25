@@ -38,4 +38,42 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
   end
+
+  def create
+    ActiveRecord::Base.transaction do
+      # 店名取得 or 登録
+      store = Store.find_or_create_by!(name: params[:order][:store]) do |s|
+        s.user = current_user
+      end
+
+      # メニューの取得 or 登録
+      menu = Menu.find_or_create_by!(name: params[:order][:menu], store: store)
+
+      # orderの登録
+      @order = current_user.orders.build(
+        menu: menu,
+        ordered: ActiveModel::Type::Boolean.new.cast(params[:order][:ordered]),
+        ordered_at: Time.current,
+        memo: params[:order][:memo]
+      )
+
+      @order.save!
+
+      if params[:order][:rating].present?
+        Review.create!(
+          user: current_user,
+          menu: menu,
+          rating: params[:order][:rating]
+        )
+      end
+
+      puts "bedore_redirect"
+      redirect_to orders_path, success: t('defaults.flash_message.created', item: Order.model_name.human)
+    rescue ActiveRecord::RecordInvalid => e
+        puts "err"
+      flash.now[:danger] = t('defaults.flash_message.not_created', item: Order.model_name.human)
+      @order ||= current_user.orders.build
+      render :new, status: :unprocessable_entity
+    end
+  end
 end
