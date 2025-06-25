@@ -22,6 +22,8 @@ class OrdersController < ApplicationController
                 current_user.orders.includes(menu: :store)
               end
 
+    @orders = @orders.includes(menu: :store).order(ordered_at: :desc).page(params[:page])
+
     respond_to do |format|
       format.html
       format.turbo_stream do
