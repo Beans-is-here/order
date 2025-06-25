@@ -15,11 +15,11 @@ class OrdersController < ApplicationController
 
     @orders = case @tab
               when "ordered"
-                current_user&.orders&.where(ordered: true)
+                current_user.orders.includes(menu: :store).where(ordered: true)
               when "wanted"
-                current_user&.orders&.where(ordered: false)
+                current_user.orders.includes(menu: :store).where(ordered: false)
               else
-                current_user&.orders
+                current_user.orders.includes(menu: :store)
               end
 
     respond_to do |format|
@@ -68,16 +68,12 @@ class OrdersController < ApplicationController
       end
 
       if params[:order][:image_url].present?
-        Menu.image_url.create!(
-            user: current_user,
-            menu: menu,
-            image_url: params[:order][:image_url]
-        )
+        menu.image_url = params[:order][:image_url]
+        menu.save!
       end
-
+puts "uploaded URL: #{menu.image_url.url}"
       redirect_to orders_path, success: t('defaults.flash_message.created', item: Order.model_name.human)
     rescue ActiveRecord::RecordInvalid => e
-        puts "err"
       flash.now[:danger] = t('defaults.flash_message.not_created', item: Order.model_name.human)
       @order ||= current_user.orders.build
       render :new, status: :unprocessable_entity
