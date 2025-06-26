@@ -3,7 +3,7 @@ import { Turbo } from "@hotwired/turbo-rails"
 
 // Connects to data-controller="tabs"
 export default class extends Controller {
-  static targets = ["tab", "list"]
+  static targets = ["tab"]
 
   change(event) {
     const tab = event.currentTarget.dataset.tab
@@ -15,13 +15,7 @@ export default class extends Controller {
     })
     event.currentTarget.classList.add("font-bold", "text-gray-700")
 
-    // タブに応じた注文一覧を取得 (Turbo Streamにて)
-    fetch(`/orders?tab=${tab}`, {
-      headers: { Accept: "text/vnd.turbo-stream.html" }
-    })
-    .then(response => response.text())
-    .then(html => {
-      Turbo.renderStreamMessage(html)
-    })
+    // タブに応じた注文一覧を取得 (Turbo Frameにて)
+    Turbo.visit(`/orders?tab=${tab}`, { frame: "order-list" })
   }
 }

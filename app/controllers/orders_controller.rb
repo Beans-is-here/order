@@ -26,14 +26,6 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.turbo_stream do
-        html = render_to_string(
-          partial: "orders/list",
-          formats: [:html],
-          locals: { orders: @orders }
-        )
-        render turbo_stream: turbo_stream.update("order-list", html)
-      end
     end
   end
 
