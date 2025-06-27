@@ -44,12 +44,16 @@ class OrdersController < ApplicationController
       menu = Menu.find_or_create_by!(name: params[:order][:menu], store: store)
 
       # orderの登録
+      ordered_flag = ActiveModel::Type::Boolean.new.cast(params[:order][:ordered])
       @order = current_user.orders.build(
         menu: menu,
-        ordered: ActiveModel::Type::Boolean.new.cast(params[:order][:ordered]),
-        ordered_at: Time.current,
+        ordered: ordered_flag,
         memo: params[:order][:memo]
       )
+
+      if ordered_flag
+        @order.ordered_at = Time.current
+      end
 
       @order.save!
 
@@ -76,7 +80,7 @@ puts "uploaded URL: #{menu.image_url.url}"
 
   def update_status
     @order = current_user.orders.find(params[:id])
-    @order.update!(ordered: true)
+    @order.update!(ordered: true, ordered_at: Time.current)
 
     respond_to do |format|
       format.turbo_stream

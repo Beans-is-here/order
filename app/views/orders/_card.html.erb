@@ -37,9 +37,11 @@
       </div>
       <% end %>
 
-      <div class="text-sm text-gray-600 mb-2">
-        注文日: <%= l(order.ordered_at, format: :short) %>
-      </div> 
+      <% if order.ordered_at.present? %>
+        <div class="text-sm text-gray-600 mb-2">
+          注文日: <%= l(order.ordered_at, format: :short) %>
+        </div> 
+      <% end %>
     </div>
   </div>
 </div>
