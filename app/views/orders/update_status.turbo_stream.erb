@@ -1,0 +1,7 @@
+<% if params[:tab] == "wanted" %>
+  <%= turbo_stream.remove dom_id(@order) %>
+<% else %>
+  <%= turbo_stream.replace dom_id(@order) do %>
+    <%= render partial: "orders/card", locals: { order: @order } %>
+  <% end %>
+<% end %>
