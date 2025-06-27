@@ -73,4 +73,14 @@ puts "uploaded URL: #{menu.image_url.url}"
       render :new, status: :unprocessable_entity
     end
   end
+
+  def update_status
+    @order = current_user.orders.find(params[:id])
+    @order.update!(ordered: true)
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to orders_path(tab: "ordered"), notice: "注文済みに更新しました" }
+    end
+  end
 end
