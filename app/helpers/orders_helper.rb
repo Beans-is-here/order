@@ -3,6 +3,6 @@ module OrdersHelper
     button_to "注文した", update_status_order_path(order, tab: current_tab),
     method: :patch,
     form: { data: { turbo_stream: true}},
-    class: "text-sm underline text-gray-700 font-normal mt-3 hover:bg-gray-100"
+    class: "bg-amber-500 hover:bg-orange-300 text-white font-bold py-2 px-5 rounded focus:outline-none"
   end
-end
+end 
