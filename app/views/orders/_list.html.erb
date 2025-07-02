@@ -1,5 +1,5 @@
 <% if orders.any? %>
-  <div class="grid grid-cols-1 gap-y-4 px-8">
+  <div class="grid grid-cols-1 gap-y-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
     <% orders.each do |order| %>
       <%= render partial: "orders/card", locals: { order: order } %>
     <% end %>

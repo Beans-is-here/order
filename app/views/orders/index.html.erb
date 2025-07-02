@@ -1,28 +1,26 @@
+<h2 class="text-2xl font-bold mb-6 text-center">注文履歴</h2>
+
 <div data-controller="tabs">
   <!-- タブボタン -->
-  <div class="flex space-x-4 mb-6">
-    <button data-action="click->tabs#change"
-            data-tabs-target="tab"
-            data-tab="all"
-            class="tab-button font-bold text-gray-700">すべて</button>
-
-    <button data-action="click->tabs#change"
-            data-tabs-target="tab"
-            data-tab="ordered"
-            class="tab-button text-gray-500">注文した</button>
-
-    <button data-action="click->tabs#change"
-            data-tabs-target="tab"
-            data-tab="wanted"
-            class="tab-button text-gray-500">気になった</button>
+  <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-4">
+    <div class="grid grid-cols-3">
+      <% [["all", "すべて"], ["ordered", "注文した"], ["wanted", "気になった"]].each do |key, label| %>
+        <button data-action="click->tabs#change"
+                data-tabs-target="tab"
+                data-tab="<%= key %>"
+                class="tab-button text-gray-500 text-lg border border-gray-300 rounded-sm">
+          <%= label %>
+        </button>
+      <% end %>
+    </div>
   </div>
 
   <!-- 一覧描画部分 -->
-  <h2 class="text-2xl font-bold mb-6 text-center">注文履歴</h2>
+
   <turbo-frame id="order-list">
     <%= render partial: "orders/list", locals: { orders: @orders } %>
-    <div class="mt-4">
-      <%= paginate @orders, params: { tab: params[:tab] } %>
-    </div>
   </turbo-frame>
 </div>
+  <div class="mt-4">
+    <%= paginate @orders, params: { tab: params[:tab] } %>
+  </div>
