@@ -1,4 +1,8 @@
 <% if orders.any? %>
+
+<%= link_to 'new', orders_path(tab: @tab, sort: "latest") %>
+|<%= link_to 'old', orders_path(tab: @tab, sort: "old") %>
+
   <div class="grid grid-cols-1 gap-y-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mt-6">
     <% orders.each do |order| %>
       <%= render partial: "orders/card", locals: { order: order } %>

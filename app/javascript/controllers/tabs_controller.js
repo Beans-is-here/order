@@ -14,8 +14,11 @@ export default class extends Controller {
     const tab = event.currentTarget.dataset.tab
     this.setActiveTab(event.currentTarget)
 
+    const urlParams = new URLSearchParams(window.location.search)
+    const currentSort = urlParams.get("sort") || "latest"
+
      // タブに応じた注文一覧を取得 (Turbo Frameにて)
-     Turbo.visit(`/orders?tab=${tab}`, { frame: "order-list" })
+     Turbo.visit(`/orders?tab=${tab}&sort=${currentSort}`, { frame: "order-list" })
     }
 
     // 選択状態のスタイル切り替え

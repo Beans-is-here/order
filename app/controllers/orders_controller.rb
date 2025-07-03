@@ -1,17 +1,29 @@
 class OrdersController < ApplicationController
   def index
     @tab = params[:tab]
+    @sort = params[:sort]
 
-    @orders = case @tab
-              when "ordered"
-                current_user.orders.includes(menu: :store).where(ordered: true)
-              when "wanted"
-                current_user.orders.includes(menu: :store).where(ordered: false)
+    @orders = current_user.orders.includes(menu: :store)
+
+    case @tab
+    when "ordered"
+      @orders = @orders.where(ordered: true)
+    when "wanted"
+      @orders = @orders.where(ordered: false)
+    else
+      @orders
+    end
+    
+    @orders = case @sort
+              when "latest"
+                @orders.latest
+              when "old"
+                @orders.old
               else
-                current_user.orders.includes(menu: :store)
+                @orders.latest
               end
 
-    @orders = @orders.includes(menu: :store).order(ordered_at: :desc).page(params[:page])
+    @orders = @orders.page(params[:page])
 
     respond_to do |format|
       format.html
