@@ -1,8 +1,21 @@
-<% if orders.any? %>
-
+<div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mt-6">
+  <div class="text-left"
+<!-- count -->
+<% if @tab == "all" %>
+  <%= @count_all %>件
+<% elsif @tab == "ordered" %>
+  <%= @count_ordered %>件
+<% else %>
+  <%= @count_wanted %>件
+<% end %>
+  </div>
+  <div class="text-right">
 <%= link_to 'new', orders_path(tab: @tab, sort: "latest") %>
-|<%= link_to 'old', orders_path(tab: @tab, sort: "old") %>
+| <%= link_to 'old', orders_path(tab: @tab, sort: "old") %>
+  </div>
+</div>
 
+<% if orders.any? %>
   <div class="grid grid-cols-1 gap-y-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mt-6">
     <% orders.each do |order| %>
       <%= render partial: "orders/card", locals: { order: order } %>

@@ -5,6 +5,11 @@ class OrdersController < ApplicationController
 
     @orders = current_user.orders.includes(menu: :store)
 
+    #count
+    @count_all = @orders.count
+    @count_ordered = @orders.where(ordered: true).count
+    @count_wanted = @orders.where(ordered: false).count
+
     case @tab
     when "ordered"
       @orders = @orders.where(ordered: true)
