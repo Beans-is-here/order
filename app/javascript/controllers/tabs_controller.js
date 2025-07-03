@@ -22,10 +22,10 @@ export default class extends Controller {
   setActiveTab(activeTab) {  
     this.tabTargets.forEach(button => {
       button.classList.remove("font-bold", "text-white", "bg-orange-400", "shadow")
-      button.classList.add("bg-gray-100", "text-gray-500")
+      button.classList.add("bg-gray-50", "text-gray-500")
     })
 
-    activeTab.classList.remove("bg-gray-100", "text-gray-500")
+    activeTab.classList.remove("bg-gray-50", "text-gray-500")
     activeTab.classList.add("font-bold", "text-white", "bg-orange-400", "shadow")
   }
 }

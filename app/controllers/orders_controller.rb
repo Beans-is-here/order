@@ -1,15 +1,4 @@
 class OrdersController < ApplicationController
-=begin
-  def index
-    @orders = Order.includes(:user)
-  end
-=end
-=begin
-  def index
-    @orders = current_user.orders.includes(:menu => :store).order(ordered_at: :desc)
-  end
-=end
-
   def index
     @tab = params[:tab]
 
@@ -32,53 +21,6 @@ class OrdersController < ApplicationController
   def new
     @order = OrderForm.new(user: current_user)
   end
-
-=begin
-  def create
-    ActiveRecord::Base.transaction do
-      # 店名取得 or 登録
-      store = Store.find_or_create_by!(name: params[:order][:store]) do |s|
-        s.user = current_user
-      end
-
-      # メニューの取得 or 登録
-      menu = Menu.find_or_create_by!(name: params[:order][:menu], store: store)
-
-      # orderの登録
-      ordered_flag = ActiveModel::Type::Boolean.new.cast(params[:order][:ordered])
-      @order = current_user.orders.build(
-        menu: menu,
-        ordered: ordered_flag,
-        memo: params[:order][:memo]
-      )
-
-      if ordered_flag
-        @order.ordered_at = Time.current
-      end
-
-      @order.save!
-
-      if params[:order][:rating].present?
-        Review.create!(
-          user: current_user,
-          menu: menu,
-          rating: params[:order][:rating]
-        )
-      end
-
-      if params[:order][:image_url].present?
-        menu.image_url = params[:order][:image_url]
-        menu.save!
-      end
-puts "uploaded URL: #{menu.image_url.url}"
-      redirect_to orders_path, success: t('defaults.flash_message.created', item: Order.model_name.human)
-    rescue ActiveRecord::RecordInvalid => e
-      flash.now[:danger] = t('defaults.flash_message.not_created', item: Order.model_name.human)
-      @order ||= current_user.orders.build
-      render :new, status: :unprocessable_entity
-    end
-  end
-=end
 
   def create
     @order = OrderForm.new(order_params, user: current_user)
