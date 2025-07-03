@@ -1,7 +1,7 @@
 class OrderForm
   include ActiveModel::Model
   include ActiveModel::Attributes
-  extend CarrierWave::Mount  # ← これを追加
+  extend CarrierWave::Mount
   
   mount_uploader :menu_image_url, MenuImageUploader
 

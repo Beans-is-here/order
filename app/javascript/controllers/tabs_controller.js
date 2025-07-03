@@ -14,18 +14,21 @@ export default class extends Controller {
     const tab = event.currentTarget.dataset.tab
     this.setActiveTab(event.currentTarget)
 
+    const urlParams = new URLSearchParams(window.location.search)
+    const currentSort = urlParams.get("sort") || "latest"
+
      // タブに応じた注文一覧を取得 (Turbo Frameにて)
-     Turbo.visit(`/orders?tab=${tab}`, { frame: "order-list" })
+     Turbo.visit(`/orders?tab=${tab}&sort=${currentSort}`, { frame: "order-list" })
     }
 
     // 選択状態のスタイル切り替え
   setActiveTab(activeTab) {  
     this.tabTargets.forEach(button => {
       button.classList.remove("font-bold", "text-white", "bg-orange-400", "shadow")
-      button.classList.add("bg-gray-100", "text-gray-500")
+      button.classList.add("bg-gray-50", "text-gray-500")
     })
 
-    activeTab.classList.remove("bg-gray-100", "text-gray-500")
+    activeTab.classList.remove("bg-gray-50", "text-gray-500")
     activeTab.classList.add("font-bold", "text-white", "bg-orange-400", "shadow")
   }
 }
