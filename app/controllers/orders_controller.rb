@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   def index
-    @tab = params[:tab]
-    @sort = params[:sort]
+    @tab = params[:tab].presence || "all"
+    @sort = params[:sort].presence || "latest"
 
     @orders = current_user.orders.includes(menu: :store)
 
