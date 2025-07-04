@@ -87,7 +87,7 @@ class OrderForm
       puts "=== Store作成開始 ==="
       puts "store_name: #{store_name.inspect}"
       
-      store = Store.find_or_create_by!(name: store_name)
+      store = Store.find_or_create_by!(name: store_name, user: user)
       menu = order.menu
       menu.update!(
         name: menu_name, 
