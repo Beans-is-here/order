@@ -1,5 +1,5 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mt-6">
-  <div class="text-left"
+  <div class="text-gray-500 space-y-4 border rounded shadow hover:shadow-lg transition bg-gray-50 p-2 flex justify-between border-gray-400">
 <!-- count -->
 <% if @tab == "all" %>
   <%= @count_all %>件
@@ -8,11 +8,12 @@
 <% else %>
   <%= @count_wanted %>件
 <% end %>
+
+<div>
+<%= link_to '新しい順', orders_path(tab: @tab, sort: "latest") %>
+| <%= link_to '古い順', orders_path(tab: @tab, sort: "old") %>
   </div>
-  <div class="text-right">
-<%= link_to 'new', orders_path(tab: @tab, sort: "latest") %>
-| <%= link_to 'old', orders_path(tab: @tab, sort: "old") %>
-  </div>
+</div>
 </div>
 
 <% if orders.any? %>
