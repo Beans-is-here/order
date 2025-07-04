@@ -2,7 +2,7 @@
 
 <div data-controller="tabs">
   <!-- タブボタン -->
-  <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-4 mt-6">
+  <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-4 mt-2">
     <div class="grid grid-cols-3">
       <% [["all", "すべて"], ["ordered", "注文した"], ["wanted", "気になった"]].each do |key, label| %>
         <button data-action="click->tabs#change"

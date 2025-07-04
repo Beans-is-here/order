@@ -8,8 +8,8 @@
           <%= link_to "nanitabeta?", root_path %>
         <% end %>
       </h1>
-      <div class="space-x4">
-      <% common_btn_class = "bg-amber-500 text-white font-normal py-2 px-4 border border-white-400 rounded hover:bg-orange-300 transition inline-block align-middle leading-tight" %>
+      <div class="flex gap-2">
+        <% common_btn_class = "bg-amber-500 text-white font-normal border border-white-400 rounded hover:bg-orange-300 transition inline-block align-middle leading-tight py-1 px-2 sm:py-2 sm:px-4 sm:text-sm" %>
         <% if user_signed_in? %>
           <%= link_to t("header.record"), new_order_path, class: common_btn_class %>
             <%= form_with url: destroy_user_session_path, method: :delete, class: "inline" do %>
