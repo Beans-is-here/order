@@ -12,9 +12,14 @@
 
   <body class="min-h-screen bg-orange-50 text-gray-800">
     <%= render "shared/header" %>
+    <div class="w-full max-w-lg mx-auto px-4 mt-4">
+      <%= render "shared/flash_messages" %>
+    </div>
     <%= yield %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <!-- message -->
+    <!-- <p class="notice"><%= notice %></p> -->
+    <!-- <p class="alert"><%= alert %></p> -->
+
   </body>
 
   
