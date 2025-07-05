@@ -1,5 +1,9 @@
 ja:
   devise:
+    shared:
+      links:
+        Log in: "ログインはこちら"
+        Sign up: "登録はこちら"
     sessions:
       new:
         sign_in_title: "ログイン"
@@ -8,3 +12,5 @@ ja:
       new:
         sign_up_title: "ユーザー登録"
         sign_up_button: "登録する"
+        At least 6 characters, including uppercase, lowercase letters, and numbers: "6文字以上の半角英数字(小文字,大文字含む)"
+        "Confirm password": "パスワードを再入力"
