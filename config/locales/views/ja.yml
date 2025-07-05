@@ -26,3 +26,5 @@ ja:
       memo: "ひとことメモ"
       memo_limit: "40字以内"
       create_button: "登録する"
+    card:
+      delete_confirm: "この履歴を削除しますか？"
