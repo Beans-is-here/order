@@ -2,8 +2,8 @@ ja:
   devise:
     shared:
       links:
-        Log in: "ログインはこちら"
-        Sign up: "登録はこちら"
+        Log in: "ログインはここから"
+        Sign up: "登録はここから"
     sessions:
       new:
         sign_in_title: "ログイン"

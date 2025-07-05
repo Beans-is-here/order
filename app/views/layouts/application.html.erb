@@ -12,9 +12,17 @@
 
   <body class="min-h-screen bg-orange-50 text-gray-800">
     <%= render "shared/header" %>
+
+    <!-- login用 -->
     <div class="w-full max-w-lg mx-auto px-4 mt-4">
       <%= render "shared/flash_messages" %>
     </div>
+    
+    <!-- order status変更時用 -->
+    <div id="flash" class="w-full max-w-lg mx-auto px-4 mt-4">
+      <%render "shared/flash_messages" %>
+    </div>
+
     <%= yield %>
     <!-- message -->
     <!-- <p class="notice"><%= notice %></p> -->
