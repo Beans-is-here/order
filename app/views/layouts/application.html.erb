@@ -10,7 +10,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class="min-h-screen bg-orange-50 text-gray-800">
+  <body class="min-h-screen flex flex-col bg-orange-50 text-gray-800">
     <%= render "shared/header" %>
 
     <!-- login用 -->
@@ -23,11 +23,12 @@
       <%render "shared/flash_messages" %>
     </div>
 
+    <main class="flex-grow">
     <%= yield %>
     <!-- message -->
     <!-- <p class="notice"><%= notice %></p> -->
     <!-- <p class="alert"><%= alert %></p> -->
-
+    </main>
   </body>
 
   

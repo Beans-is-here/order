@@ -1,4 +1,7 @@
 ja:
+  defaults:
+    flash_message:
+      not_created: 作成に失敗しました
   helpers:
     submit:
       create: 
