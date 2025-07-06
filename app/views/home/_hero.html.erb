@@ -1,10 +1,13 @@
-<section class="bg-slate-100 py-20 text-left">
+<section class="bg-gray-50 py-20 text-center text-orange-900">
   <div class="max-w-3xl mx-auto px-4">
-    <h1 class="text-4xl font-bold mb-4">前回ナニを食べたか覚えてる?</h1>
-    <p class="text-2xl text-gray-600 mb-6">飲食店でのメニュー選びをサポートする記録アプリ</p>
+    <h1 class="text-4xl font-bold mt-4">"あれ、前にもこれ食べたな"</h1>
+    <p class="text-2xl text-gray-600 mt-4">そんな思いはもうさせません。<br>
+    飲食店でのメニュー選びをサポートする記録アプリ</p>
+    <div class="mt-6">
     <% if user_signed_in? %>
-      <%= link_to "記録をはじめる", orders_path, class: "bg-amber-500 text-white text-xl font-bold py-2 px-5 border border-white-400 rounded hover:bg-orange-300 transition" %> 
+      <%= link_to "記録をはじめる", orders_path, class: "bg-amber-500 text-white text-xl font-bold py-2 px-5 border border-white-400 rounded hover:bg-amber-400 transition" %> 
     <% else %>   
-      <%= link_to "記録をはじめる", new_user_registration_path, class: "bg-amber-500 text-white text-xl font-bold py-2 px-5 border border-white-400 rounded hover:bg-orange-300 transition" %>
+      <%= link_to "記録をはじめる", new_user_registration_path, class: "bg-amber-500 text-white text-xl font-bold py-2 px-5 border border-white-400 rounded hover:bg-amber-400 transition" %>
     <% end %>
+    </div>
   </div>
