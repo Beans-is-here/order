@@ -18,13 +18,13 @@ ja:
     record: 記録する
   orders:
     new:
-      as_ordered_menu: "注文したメニューとして登録"
-      as_interested_menu: "気になるメニューとして登録"
+      as_ordered_menu: "オーダー済みメニューとして記録"
+      as_interested_menu: "気になるメニューとして記録"
       store: "店名"
       menu: "メニュー"
       rating: "評価"
       memo: "ひとことメモ"
       memo_limit: "40字以内"
-      create_button: "登録する"
+      create_button: "記録する"
     card:
-      delete_confirm: "この履歴を削除しますか？"
+      delete_confirm: "この記録を削除しますか？"

@@ -3,9 +3,9 @@
     <div class="flex justify-between items-center px-4 sm:px-8 lg:px-10">
       <h1 class="text-2xl sm:text-3xl font-bold text-black">
         <% if user_signed_in? %>
-          <%= link_to "nanitabeta?", orders_path %>
+          <%= link_to "Order?", orders_path %>
         <% else %>
-          <%= link_to "nanitabeta?", root_path %>
+          <%= link_to "Order?", root_path %>
         <% end %>
       </h1>
       <div class="flex gap-2">
