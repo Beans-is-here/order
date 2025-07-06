@@ -8,29 +8,34 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-user = User.find_or_create_by!(email: 'test@example.com') do |u|
-  u.name = "TESTuser"
-  u.password = 'password'
-  u.password_confirmation = 'password'
-end
+#user = User.find_or_create_by!(email: 'test@example.com') do |u|
+#  u.name = "TESTuser"
+#  u.password = 'password'
+#  u.password_confirmation = 'password'
+#end
+#
+#store = Store.find_or_create_by!(name: 'TESTお店', user: user)
+#
+#menus = []
+#5.times do |i|
+#  menu = Menu.create(
+#    name: "メニュー#{1 + i}",
+#    store: store
+#  )
+#  menus << menu
+#end
+#
+#menus.each_with_index do |menu, i|
+#  Order.create!(
+#    user: user,
+#    menu: menu,
+#    memo: "Oishi#{i + 1}",
+#    ordered: i.even?,
+#    ordered_at: Time.current - i.days
+#  )
+#end
 
-store = Store.find_or_create_by!(name: 'TESTお店', user: user)
-
-menus = []
-5.times do |i|
-  menu = Menu.create(
-    name: "メニュー#{1 + i}",
-    store: store
-  )
-  menus << menu
-end
-
-menus.each_with_index do |menu, i|
-  Order.create!(
-    user: user,
-    menu: menu,
-    memo: "Oishi#{i + 1}",
-    ordered: i.even?,
-    ordered_at: Time.current - i.days
-  )
+user = User.find_or_create_by!(email: 'guest@example.com') do |user|
+  user.name = "ゲストユーザー"
+  user.password = 'Guest0Password'
 end
