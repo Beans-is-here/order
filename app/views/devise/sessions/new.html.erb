@@ -13,14 +13,14 @@
         <%= f.password_field :password, autocomplete: "new-password", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" %>
       </div>
 
-      <% if devise_mapping.rememberable? %>
+<!--      <% if devise_mapping.rememberable? %>
         <div class="field">
           <%= f.check_box :remember_me %>
           <%= f.label :remember_me %>
         </div>
-      <% end %>
+      <% end %> -->
 
-      <div class="flex items-center justify-center">
+      <div class="flex items-center justify-center mt-6">
         <%= f.submit t("devise.sessions.new.sign_in_button"), class: "bg-amber-500 hover:bg-orange-300 text-white font-bold py-2 px-5 rounded focus:outline-none" %>
       </div>
     <% end %>
@@ -29,10 +29,11 @@
         <%= render "devise/shared/links" %>
       </div>
 
-      <div class="underline mt-2 text-center">
+      
+     <!-- <div class="underline mt-2 text-center">
         <%= button_to 'ゲストとしてログイン', users_guest_sign_in_path,
             method: :post,
             class: "bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-5 rounded" %>
-      </div>
+      </div> -->
   </div>
 </div>
