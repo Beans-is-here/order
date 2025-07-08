@@ -4,9 +4,9 @@
     <p class="text-xl sm:text-2xl text-gray-600 mt-4">注文時の悩みを記録で解決</p>
     <div class="mt-8">
       <% if user_signed_in? %>
-        <%= link_to "記録をはじめる", orders_path, class: "bg-amber-500 text-white text-lg sm:text-xl font-bold py-3 px-6 rounded hover:bg-amber-400 transition" %> 
+        <%= link_to "記録をはじめる", orders_path, class: "bg-amber-500 text-white text-lg sm:text-xl font-bold py-3 px-6 rounded hover:bg-orange-400 transition" %> 
       <% else %>   
-        <%= link_to "記録をはじめる", new_user_registration_path, class: "bg-amber-500 text-white text-lg sm:text-xl font-bold py-3 px-6 rounded hover:bg-amber-400 transition" %>
+        <%= link_to "記録をはじめる", new_user_registration_path, class: "bg-amber-500 text-white text-lg sm:text-xl font-bold py-3 px-6 rounded hover:bg-orange-400 transition" %>
       <% end %>
     </div>
   </div>
