@@ -13,5 +13,5 @@ CarrierWave.configure do |config|
       region: ENV['AWS_REGION'], # リージョン
       path_style: true
     }
-    config.fog_public = false
+    config.fog_public = true
 end 
