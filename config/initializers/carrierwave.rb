@@ -13,5 +13,7 @@ CarrierWave.configure do |config|
       region: 'ap-northeast-1', # リージョン
       path_style: true
     }
+puts "AWS_ACCESS_KEY_ID: #{ENV['AWS_ACCESS_KEY_ID'].present? ? '設定済み' : '未設定'}"
+puts "AWS_SECRET_ACCESS_KEY: #{ENV['AWS_SECRET_ACCESS_KEY'].present? ? '設定済み' : '未設定'}"
 
 end 
