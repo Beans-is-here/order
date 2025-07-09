@@ -66,4 +66,10 @@
         </label>
         <%= f.file_field :menu_image_url, id: "menu_image_url", data: { image_preview_target: "input", action: "image-preview#previewImage" }, class: "hidden" %>
       </div>
+
+      <div class="flex justify-center">
+      <div class="bg-amber-500 hover:bg-orange-400 text-lg text-white border border-white-400 flex items-center justify-center font-bold py-2 px-5 mt-6 rounded cursor-pointer">  
+        <%= f.submit t("orders.new.create_button") %>
+      </div>
+    </div>
 <% end %>
