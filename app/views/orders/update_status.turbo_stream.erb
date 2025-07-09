@@ -5,7 +5,7 @@
     <%= render partial: "orders/card", locals: { order: @order } %>
   <% end %>
 <% end %>
-// DOM更新命令がHTMLレスポンスとしてクライアントに返る
+<!-- DOM更新命令がHTMLレスポンスとしてクライアントに返る -->
 <%= turbo_stream.update "flash" do %>
   <%= render "shared/flash_messages" %>
 <% end %>
