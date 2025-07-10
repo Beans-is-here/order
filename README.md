@@ -71,4 +71,3 @@
 - `MiniMagick` - 画像生成
 - 'fog-aws' - 画像アップロード
 - 'dotenv-rails' - 画像アップロードテスト
-  
