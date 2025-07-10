@@ -8,6 +8,8 @@ class MenuImageUploader < CarrierWave::Uploader::Base
   else
     storage :file
   end
+  # CarrierWave側でconfig.storage :fogを指定してもUploader側のstorageが優先される
+
   # Choose what kind of storage to use for this uploader:
   # storage :file
   # storage :fog

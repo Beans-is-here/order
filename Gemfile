@@ -52,7 +52,6 @@ gem "devise-i18n"
 gem "rails-i18n", "~>7.0.0"
 gem "carrierwave", "~>2.2.2"
 gem "kaminari", "~>1.2.2"
-gem "aws-sdk-s3", require: false
 gem 'fog-aws'
 gem 'dotenv-rails'
 
