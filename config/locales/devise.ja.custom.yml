@@ -4,13 +4,28 @@ ja:
       links:
         Log in: "ログインはここから"
         Sign up: "登録はここから"
+        password_forgot: "パスワードをお忘れの方"
     sessions:
       new:
         sign_in_title: "ログイン"
         sign_in_button: "ログインする"
+    passwords:
+      new:
+        Forgot your password?: "パスワード再発行"
+        Send me reset password instructions: "パスワードリセットメールを送る"
+      edit:
+        Change your password: "パスワード変更"
+        Change my password: "パスワードを変更"
     registrations:
       new:
         sign_up_title: "ユーザー登録"
         sign_up_button: "登録する"
         At least 6 characters, including uppercase, lowercase letters, and numbers: "6文字以上の半角英数字(小文字,大文字含む)"
         "Confirm password": "パスワードを再入力"
+    mailer:
+      reset_password_instructions:
+        Change my password: "パスワード再発行"
+        greeting: "%{email} 様"
+        instructions: "以下のリンクからパスワードを再設定できます："
+        change_password: "パスワードを再設定する"
+        ignore: "このメールに心当たりがない場合は無視してください。"
