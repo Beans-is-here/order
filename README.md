@@ -53,7 +53,7 @@
 - **データベース**: PostgreSQL 15
 - **フロントエンド**: Tailwind CSS
 - **インフラ**: Docker / Render
-- **メール機能**: ActionMailer
+- **メール機能**: ActionMailer 7/11 SMTP Gmail
 
 ### 使用Gem
 
