@@ -80,13 +80,13 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   # smtp導入
-  config.action_mailer.default_url_options = { host: 'order.onrender.com' }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
-    domain: "order-27ds.onrender.com",
+    domain: "localhost",
     user_name: ENV["GMAIL_USERNAME"],
     password: ENV["GMAIL_PASSWORD"],
     authentication: :plain,
