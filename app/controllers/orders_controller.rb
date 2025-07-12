@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :set_q, only: [:search]
   def index
     @tab = params[:tab].presence || "all"
     @sort = params[:sort].presence || "latest"
@@ -89,6 +90,10 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
+  def search
+    @results = @q.result
+  end
+
   private
 
   def order_params
@@ -100,5 +105,9 @@ class OrdersController < ApplicationController
       :review_rating,
       :menu_image_url
     )
+  end
+
+  def set_q
+    @q = User.ransack(params[:q])
   end
 end
