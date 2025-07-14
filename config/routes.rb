@@ -3,9 +3,6 @@ Rails.application.routes.draw do
   root to: 'home#index'
   
   resources :orders do
-    collection  do
-      get 'search'
-    end
     member do
       patch :update_status
     end

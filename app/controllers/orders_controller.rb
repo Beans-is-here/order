@@ -1,24 +1,34 @@
 class OrdersController < ApplicationController
-  before_action :set_q, only: [:search]
   def index
     @tab = params[:tab].presence || "all"
     @sort = params[:sort].presence || "latest"
 
     @orders = current_user.orders.includes(menu: :store)
 
-    #count
-    @count_all = @orders.count
-    @count_ordered = @orders.where(ordered: true).count
-    @count_wanted = @orders.where(ordered: false).count
-
     case @tab
     when "ordered"
       @orders = @orders.where(ordered: true)
     when "wanted"
       @orders = @orders.where(ordered: false)
-    else
+    else 
       @orders
     end
+
+    # search form
+    if params[:search].present?
+      keyword = params.dig(:search, :keyword).to_s
+      unless keyword.blank?
+        @orders = @orders.joins(menu: :store).where(
+          "menus.name ILIKE :kw OR stores.name ILIKE :kw",
+          kw: "%#{keyword}%"
+        )
+      end
+    end
+
+    #count
+    @count_all = @orders.count
+    @count_ordered = @orders.where(ordered: true).count
+    @count_wanted = @orders.where(ordered: false).count
     
     @orders = case @sort
               when "latest"
@@ -33,6 +43,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("order-list", partial: "orders/list", locals: { orders: @orders }) }
     end
   end
 
@@ -90,10 +101,6 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
-  def search
-    @results = @q.result
-  end
-
   private
 
   def order_params
@@ -105,9 +112,5 @@ class OrdersController < ApplicationController
       :review_rating,
       :menu_image_url
     )
-  end
-
-  def set_q
-    @q = User.ransack(params[:q])
   end
 end
