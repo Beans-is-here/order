@@ -64,7 +64,7 @@
 - `carrierwave` (2.2.2) - 画像アップロード
 - `turbo-rails` (1.1.1) - Turbo対応
 - `kaminari` (1.2.2) - ページネーション
-- `ransack` (3.2.1) - 検索機能
+- `ransack` (3.2.1) - 検索機能 => form objectで対応
 - `letter_opener_web` (2.0.0) - メール確認用
 - `config` (4.0.0) - アプリケーション設定
 - `pry-byebug`（開発用）
