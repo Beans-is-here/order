@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  order_id: 
+  recommended_at: 2025-07-18 19:37:18
+  acted: false
+
+two:
+  user_id: 
+  order_id: 
+  recommended_at: 2025-07-18 19:37:18
+  acted: false
