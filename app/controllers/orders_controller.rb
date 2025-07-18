@@ -18,9 +18,10 @@ class OrdersController < ApplicationController
     if params[:search].present?
       keyword = params.dig(:search, :keyword).to_s
       unless keyword.blank?
+        normalized = Normalizer.normalize_name(keyword)
         @orders = @orders.joins(menu: :store).where(
-          "menus.name ILIKE :kw OR stores.name ILIKE :kw",
-          kw: "%#{keyword}%"
+          "menus.name_normalized ILIKE :kw OR stores.name_normalized ILIKE :kw",
+          kw: "%#{normalized}%"
         )
       end
     end
