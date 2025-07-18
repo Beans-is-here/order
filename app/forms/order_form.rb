@@ -36,7 +36,7 @@ class OrderForm
       puts "=== Store作成開始 ==="
       puts "store_name: #{store_name.inspect}"
 
-      begin
+      begin        
       store = Store.find_or_create_by!(name: store_name, user: user)
       puts "Store作成完了: #{store.id}"
     rescue => e

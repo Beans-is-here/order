@@ -17,8 +17,10 @@ class OrderSearch
     scope = Order.includes(menu: :store).where(user_id: user.id)
 
     scope = scope.where(ordered: ordered) unless ordered.nil?
-    scope = scope.references(:menus).where("menus.name ILIKE ?", "%#{menu_name}%")
-    scope = scope.references(:stores).where("stores.name ILIKE ?", "%#{store_name}%")
+    normalized = Normalizer.normalize_name(menu_name)
+    scope = scope.references(:menus).where("menus.name_normalized ILIKE ?", "%#{normalized}%")
+    normalized = Normalizer.normalize_name(store_name)
+    scope = scope.references(:stores).where("stores.name_normalized ILIKE ?", "%#{normalized}%")
     
     puts "[DEBUG] ordered: #{ordered.inspect}, store_name: #{store_name.inspect}, menu_name: #{menu_name.inspect}"
     puts "[DEBUG] SQL: #{scope.to_sql}"
