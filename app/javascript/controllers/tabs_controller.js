@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import { Turbo } from "@hotwired/turbo-rails"
 
 // Connects to data-controller="tabs"
-export default class extends Controller {
+export default class TabsController extends Controller {
   static targets = ["tab"]
 
   connect() {

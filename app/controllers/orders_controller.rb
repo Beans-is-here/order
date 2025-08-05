@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
   def index
+    puts @recommendation_checked #必ずnilとなる
+    # before_actionでcheck_recommendationが実行される
+    puts @recommendation_checked # trueになる
     @tab = params[:tab].presence || "all"
     @sort = params[:sort].presence || "latest"
 
@@ -46,6 +49,11 @@ class OrdersController < ApplicationController
       format.html
       format.turbo_stream { render turbo_stream: turbo_stream.replace("order-list", partial: "orders/list", locals: { orders: @orders }) }
     end
+        # デバッグ用ログ
+    Rails.logger.info "=== Orders#index ==="
+    Rails.logger.info "セッション: #{session[:recommendation_id]}"
+    Rails.logger.info "ユーザー: #{current_user&.id}"
+    Rails.logger.info "=================="
   end
 
   def new
