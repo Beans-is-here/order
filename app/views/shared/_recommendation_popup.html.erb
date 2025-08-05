@@ -1,0 +1,26 @@
+<% if session[:recommendation_id] %>
+  <% recommendation = current_user.orders.find_by(id: session[:recommendation_id]) %>
+  <% if recommendation %>　<!-- ← 注文が実際に存在するかチェック(気になる=>食べたなど　改めて検証) -->
+    <div data-controller="recommendation-popup"
+         data-recommendation-popup-target="popup"
+         data-recommendation-popup-show-delay-value="800"
+         data-recommendation-popup-auto-close-delay-value="7000"
+         data-recommendation-popup-animation-duration-value="300"
+         class="fixed top-4 right-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg shadow-md p-3 max-w-xs transform translate-x-full transition-transform duration-300 z-50">
+            <!-- ↑ この要素がDOMに追加された瞬間にStimulusが自動実行！ -->
+            <!-- ↑ キャッシュが残るため、recommendation_popup_controllerに設定値を記載しないこと。 -->
+
+      <div class="flex justify-between items-start">
+        <div class="pr-2">
+          <p class="text-sm font-medium text-blue-800">
+            そろそろ<%= recommendation.menu.name %>を食べたい頃じゃないですか？
+          </p>
+        </div>
+        <button data-action="recommendation-popup#close"
+                class="text-blue-400 hover:text-blue-600 flex-shrink-0">
+          ×
+        </button>
+      </div>
+    </div>
+  <% end %>
+<% end %>

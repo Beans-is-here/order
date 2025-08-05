@@ -24,7 +24,12 @@
     </div>
 
     <main class="flex-grow">
-    <%= yield %>
+
+    <% if controller_name == 'orders' && action_name == 'index' %>
+      <%= render 'shared/recommendation_popup' %>
+    <% end %>
+   
+    <%= yield %> 
     <!-- message -->
     <!-- <p class="notice"><%= notice %></p> -->
     <!-- <p class="alert"><%= alert %></p> -->

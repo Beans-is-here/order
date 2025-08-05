@@ -12,3 +12,6 @@ application.register("tabs", TabsController)
 
 import ImagePreviewController from "./image_preview_controller"
 application.register("image-preview", ImagePreviewController)
+
+import RecommendationPopupController from "./recommendation_popup_controller"
+application.register("recommendation-popup", RecommendationPopupController)
