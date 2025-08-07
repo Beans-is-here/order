@@ -7,11 +7,11 @@ import { application } from "./application"
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import TabsController from "./tabs_controller"
-application.register("tabs", TabsController)
-
 import ImagePreviewController from "./image_preview_controller"
 application.register("image-preview", ImagePreviewController)
 
 import RecommendationPopupController from "./recommendation_popup_controller"
 application.register("recommendation-popup", RecommendationPopupController)
+
+import TabsController from "./tabs_controller"
+application.register("tabs", TabsController)
