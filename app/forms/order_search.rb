@@ -1,3 +1,4 @@
+# fat controllerを懸念してform objectへ書き出し。
 class OrderSearch
   include ActiveModel::Model
   include ActiveModel::Attributes
