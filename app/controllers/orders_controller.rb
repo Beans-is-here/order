@@ -8,32 +8,38 @@ class OrdersController < ApplicationController
 
     @orders = current_user.orders.includes(menu: :store)
 
-    case @tab
-    when "ordered"
-      @orders = @orders.where(ordered: true)
-    when "wanted"
-      @orders = @orders.where(ordered: false)
-    else 
-      @orders
-    end
-
+     # ===== デバッグ情報を追加 =====
+    Rails.logger.info "=== パラメータデバッグ ==="
+    Rails.logger.info "全params: #{params.inspect}"
+    Rails.logger.info "params[:search]: #{params[:search].inspect}"
+    Rails.logger.info "search_params: #{search_params.inspect}"
+    Rails.logger.info "=========================="
+    
+    puts "[CONTROLLER DEBUG] 全params: #{params.inspect}"
+    puts "[CONTROLLER DEBUG] params[:search]: #{params[:search].inspect}"
+    puts "[CONTROLLER DEBUG] search_params: #{search_params.inspect}"
+    
     # search form
-    if params[:search].present?
-      keyword = params.dig(:search, :keyword).to_s
-      unless keyword.blank?
-        normalized = Normalizer.normalize_name(keyword)
-        @orders = @orders.joins(menu: :store).where(
-          "menus.name_normalized ILIKE :kw OR stores.name_normalized ILIKE :kw",
-          kw: "%#{normalized}%"
-        )
-      end
-    end
+#    if params[:search].present?
+#      keyword = params.dig(:search, :keyword).to_s
+#      unless keyword.blank?
+#        normalized = Normalizer.normalize_name(keyword)
+#        @orders = @orders.joins(menu: :store).where(
+#          "menus.name_normalized ILIKE :kw OR stores.name_normalized ILIKE :kw",
+#          kw: "%#{normalized}%"
+#        )
+#      end
+#    end
+
+    @order_search = OrderSearch.new(search_params, user: current_user, tab: @tab)
+    @orders = @order_search.results
 
     #count
     @count_all = @orders.count
     @count_ordered = @orders.where(ordered: true).count
     @count_wanted = @orders.where(ordered: false).count
     
+    #sort
     @orders = case @sort
               when "latest"
                 @orders.latest
@@ -54,6 +60,36 @@ class OrdersController < ApplicationController
     Rails.logger.info "セッション: #{session[:recommendation_id]}"
     Rails.logger.info "ユーザー: #{current_user&.id}"
     Rails.logger.info "=================="
+  end
+
+  def autocomplete
+    Rails.logger.info "=== Orders#autocomplete ==="
+    query = params[:q]&.strip
+
+    Rails.logger.info "受信したクエリ: #{query.inspect}"
+
+    # form objectで処理
+    order_search = OrderSearch.new({}, user: current_user)
+    suggestions = order_search.autocomplete_suggestions(query)
+
+    Rails.logger.info "生成された候補: #{suggestions.inspect}"
+
+    # stimulus-autocompleteの形式
+#    formatted_suggestions = suggestions.map do |suggestion|
+#      {
+#        label: "#{suggestion[:text]} (#{suggestion[:store]})", #表示テキスト
+#        value: suggestion[:text] #選択時に入力される値
+#      }
+    menus_data = suggestions.map do |suggestion|
+      {
+        name: suggestion[:text],
+        store: { name: suggestion[:store]}
+    }
+    end
+    
+#    Rails.logger.info "フォーマット後の候補: #{formatted_suggestions.inspect}"
+#    render json: formatted_suggestions
+    render partial: 'autocomplete_results', locals: { menus: menus_data }
   end
 
   def new
@@ -121,5 +157,12 @@ class OrdersController < ApplicationController
       :review_rating,
       :menu_image_url
     )
+  end
+
+  def search_params
+    #params.fetch(:search, {}).permit(:keyword)　# hashメソッド
+    result = params.fetch(:search, {}).permit(:keyword)
+    puts "[CONTROLLER DEBUG] search_paramsの結果: #{result.inspect}"
+    result
   end
 end

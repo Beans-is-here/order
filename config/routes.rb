@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     member do
       patch :update_status
     end
+    collection do
+      get :autocomplete
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

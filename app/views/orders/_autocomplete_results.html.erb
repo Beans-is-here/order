@@ -1,0 +1,5 @@
+<% menus.each do |menu| %>
+  <li data-autocomplete-target="option" data-value="<%= menu[:name] %>" role="option">
+    <%= menu[:name] %>
+  </li>
+<% end %>
