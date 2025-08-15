@@ -18,19 +18,8 @@ class OrdersController < ApplicationController
     puts "[CONTROLLER DEBUG] 全params: #{params.inspect}"
     puts "[CONTROLLER DEBUG] params[:search]: #{params[:search].inspect}"
     puts "[CONTROLLER DEBUG] search_params: #{search_params.inspect}"
-    
-    # search form
-#    if params[:search].present?
-#      keyword = params.dig(:search, :keyword).to_s
-#      unless keyword.blank?
-#        normalized = Normalizer.normalize_name(keyword)
-#        @orders = @orders.joins(menu: :store).where(
-#          "menus.name_normalized ILIKE :kw OR stores.name_normalized ILIKE :kw",
-#          kw: "%#{normalized}%"
-#        )
-#      end
-#    end
 
+    # search　タブ移動、フォーム共通
     @order_search = OrderSearch.new(search_params, user: current_user, tab: @tab)
     @orders = @order_search.results
 
