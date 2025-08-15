@@ -10,20 +10,20 @@ class OrderSearch
 
   attr_reader :user, :tab
 
+  # 検索前に初期化
   def initialize(attributes = {}, user:, tab: "all") 
     @user = user
     @tab = tab
     puts "[FORM OBJECT DEBUG] 初期化時のattributes: #{attributes.inspect}"
     puts "[FORM OBJECT DEBUG] 初期化時のtab: #{@tab}"
+    puts "[FORM OBJECT DEBUG] 初期化時のuser: #{@user}"
     super(attributes)
     puts "[FORM OBJECT DEBUG] 初期化後のkeyword: #{keyword.inspect}"
   end
 
   def results
+    puts "[FORM OBJECT DEBUG] results実行時のtab: #{@tab.inspect}"
     scope = user.orders.includes(menu: :store)
- #   scope = Order.includes(menu: :store).where(user_id: user.id)
- #   tabを考慮
- #   scope = scope.where(ordered: ordered) unless ordered.nil?
 
     case @tab
     when "ordered"
@@ -43,11 +43,6 @@ class OrderSearch
       )
     end
 
- #   normalized = Normalizer.normalize_name(menu_name)
- #   scope = scope.references(:menus).where("menus.name_normalized ILIKE ?", "%#{normalized}%")
-
- #   normalized = Normalizer.normalize_name(store_name)
- #   scope = scope.references(:stores).where("stores.name_normalized ILIKE ?", "%#{normalized}%")
     puts "[DEBUG] user経由でのorders: #{user.orders.count}"
     scope
   end
