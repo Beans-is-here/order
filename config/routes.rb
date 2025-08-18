@@ -27,4 +27,5 @@ Rails.application.routes.draw do
   end
 
   post 'clear_recommendation_session', to: 'application#clear_recommendation_session'
+  get 'orders/share/:token', to: 'order_shares#show', as: 'order_share'
 end
