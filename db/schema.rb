@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_18_103718) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_16_132717) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,7 +47,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_18_103718) do
     t.boolean "ordered", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "share_token"
     t.index ["menu_id"], name: "index_orders_on_menu_id"
+    t.index ["share_token"], name: "index_orders_on_share_token", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

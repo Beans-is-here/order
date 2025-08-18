@@ -34,7 +34,7 @@ class OrderSearch
     end
 
     puts "[FORM OBJECT DEBUG] タブ適用後のscope: #{scope.to_sql}"
-
+# フォーム送信時
     if keyword.present?
       normalized = Normalizer.normalize_name(keyword)
       scope = scope.joins(menu: :store).where(
@@ -46,7 +46,7 @@ class OrderSearch
     puts "[DEBUG] user経由でのorders: #{user.orders.count}"
     scope
   end
-
+# 文字列補完
   def autocomplete_suggestions(query, limit: 5)
     return [] if query.blank?
     puts "[AUTOCOMPLETE DEBUG] 受信したクエリ: #{query.inspect}"
