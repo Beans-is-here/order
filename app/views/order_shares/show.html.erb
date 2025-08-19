@@ -20,6 +20,10 @@
   <meta property="og:image:height" content="630" />
 <% end %>
 
+<script>
+  window.shareData = <%= raw @share_data.to_json %>;
+</script>
+
 <div class="grid grid-cols-1 gap-y-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mt-6">
   <div class="h-40 space-y-4 border rounded shadow hover:shadow-lg transition bg-white flex flex-col justify-between border-gray-400">
     <div class="h-full flex items-start p-2 rounded space-x-4">
@@ -74,10 +78,16 @@
         </span>
 
     <!-- x hoverで共有アクションである旨を伝える-->
-        <div class="flex items-center flex-row-reverse font-normal truncate gap-1">
-          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M10.053,7.988l5.631,8.024h-1.497L8.566,7.988H10.053z M21,7v10	c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4V7c0-2.209,1.791-4,4-4h10C19.209,3,21,4.791,21,7z M17.538,17l-4.186-5.99L16.774,7	h-1.311l-2.704,3.16L10.552,7H6.702l3.941,5.633L6.906,17h1.333l3.001-3.516L13.698,17H17.538z"></path>
-          </svg>
+        <div class="container">
+          <div class="flex items-center flex-row-reverse font-normal truncate gap-1 share-buttons" 
+               data-store-name="<%= @order&.menu&.store&.name %>" 
+               data-menu-name="<%= @order&.menu&.name %>"
+               data-order-id="<%= @order&.id %>"
+               data-share-token="<%= @order&.share_token %>">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24">
+              <path d="M10.053,7.988l5.631,8.024h-1.497L8.566,7.988H10.053z M21,7v10	c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4V7c0-2.209,1.791-4,4-4h10C19.209,3,21,4.791,21,7z M17.538,17l-4.186-5.99L16.774,7	h-1.311l-2.704,3.16L10.552,7H6.702l3.941,5.633L6.906,17h1.333l3.001-3.516L13.698,17H17.538z"></path>
+            </svg>
+          </div>
         </div>
   
     <!-- delete -->
