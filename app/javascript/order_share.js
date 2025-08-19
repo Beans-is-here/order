@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     button.addEventListener('click', function() {
         //動作確認
       console.log('共有ボタンがクリックされました！');
+
       //id, token取得
       const orderId = this.dataset.orderId;
       const shareToken = this.dataset.shareToken;
@@ -22,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
       //alert(`注文ID: ${this.dataset.orderId} の共有ボタンがクリックされました！`);
      // alert('共有URL: ${shareUrl}');
 
-     shareToX(shareUrl, orderId)
+     //shareToX(shareUrl, orderId)
+     shareToX(shareData);
     });
   });
 });
@@ -36,15 +38,19 @@ function generateShareUrl(shareToken) {
     return shareUrl;
 }
 
-function shareToX(shareUrl, orderId) {
+//function shareToX(shareUrl, orderId) {
+function shareToX(shareData) {
     try {
         // textinfo
-        // 動的にしたい。ex, XXのYYを注文しました。XXのYYを気になるメニューに追加しました。
-        const shareText = encodeURIComponent('前にもこれ食べたな, 注文時の悩みを記録で解決');
         const encodeUrl = encodeURIComponent(shareUrl);
         const hashTags = encodeURIComponent('注文履歴アプリOrder?');
 
-        const xShareUrl = `https://x.com/intent/post?text=${shareText}&url=${encodeUrl}&hashtags=${hashTags}`;
+
+        if (shareData.store_name) {
+          const text = `${shareData.store_name}の情報をチェック`;
+        }
+
+        const xShareUrl = `https://x.com/intent/post?url=${encodeUrl}&hashtags=${hashTags}`;
         console.log('x共有URL:', xShareUrl);
 
         //xを開く
@@ -55,4 +61,15 @@ function shareToX(shareUrl, orderId) {
         console.error('共有エラー:', error);
         alert('失敗');
     }
+}
+
+function generateShareText(data) {
+  const storeName = shareData.store_name;
+  const menuName = shareData.menu_name;
+
+//  if (data.ordered) {
+//    text = `${data.store_name}で${data.menu_name}を注文しました`;
+//  } else {
+    text = `${storeName}で${menuName}を気になるメニューとして登録しました`;
+//  }
 }

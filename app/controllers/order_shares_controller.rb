@@ -8,8 +8,15 @@ class OrderSharesController < ApplicationController
     # OGP用のメタ情報
     @share_title = build_share_title
     @share_description = build_share_description
-   # @share_image = asset_url('sample.png')
+    # @share_image = asset_url('sample.png')
     @share_url = request.original_url
+
+    # post本文
+    @share_data = {
+      store_name: @order&.menu&.store&.name,
+      menu_name: @order&.menu&.name
+      #ordered: @order&.ordered || false
+    }
   end
 
   # デバッグ用ログ
@@ -24,6 +31,6 @@ class OrderSharesController < ApplicationController
   end
 
   def build_share_description
-    "前にもこれ食べたな, 注文時の悩みを記録で解決"
+    "前にもこれ食べた? 注文時の悩みを記録で解決"
   end
 end
