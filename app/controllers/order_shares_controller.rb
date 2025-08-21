@@ -11,19 +11,13 @@ class OrderSharesController < ApplicationController
     # @share_image = asset_url('sample.png')
     @share_url = request.original_url
 
-    # post本文
-    @share_data = {
-      store_name: @order&.menu&.store&.name,
-      menu_name: @order&.menu&.name
-      #ordered: @order&.ordered || false
-    }
-  end
-
   # デバッグ用ログ
     Rails.logger.info "=== OGP Debug ==="
     Rails.logger.info "Title: #{@share_title}"
     Rails.logger.info "Description: #{@share_description}"
     Rails.logger.info "URL: #{@share_url}"
+ #   Rails.logger.info "Share data: #{@share_data}"
+  end
 
   private
   def build_share_title

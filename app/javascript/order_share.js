@@ -3,7 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const shareButtons = document.querySelectorAll('.share-btn');
   console.log('共有ボタンの数:', shareButtons.length);
-  
+
+ // if (!window.shareData) {
+ //   console.error('window.shareDataが定義されていません');
+ //   return;
+ // }
+
   shareButtons.forEach(button => {
     button.addEventListener('click', function() {
         //動作確認
@@ -19,9 +24,17 @@ document.addEventListener('DOMContentLoaded', function() {
       const shareUrl = generateShareUrl(shareToken);
       console.log('生成されたURL:', shareUrl);
 
-      // まずはアラートで確認
-      //alert(`注文ID: ${this.dataset.orderId} の共有ボタンがクリックされました！`);
-     // alert('共有URL: ${shareUrl}');
+      //storename, menuname取得
+      const storeName = this.dataset.storeName;
+      const menuName = this.dataset.menuName;
+      console.log('StoreName:', storeName);
+      console.log('MenuName:', menuName);
+
+      const shareData = {
+        store_name: storeName,
+        menu_name: menuName,
+        shareUrl: shareUrl
+      }
 
      //shareToX(shareUrl, orderId)
      shareToX(shareData);
@@ -42,13 +55,13 @@ function generateShareUrl(shareToken) {
 function shareToX(shareData) {
     try {
         // textinfo
-        const encodeUrl = encodeURIComponent(shareUrl);
+        const encodeUrl = encodeURIComponent(shareData.shareUrl);
         const hashTags = encodeURIComponent('注文履歴アプリOrder?');
 
 
-        if (shareData.store_name) {
-          const text = `${shareData.store_name}の情報をチェック`;
-        }
+       // if (shareData.store_name) {
+       //   const text = `${shareData.store_name}の情報をチェック`;
+       // }
 
         const xShareUrl = `https://x.com/intent/post?url=${encodeUrl}&hashtags=${hashTags}`;
         console.log('x共有URL:', xShareUrl);
