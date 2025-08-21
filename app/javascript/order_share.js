@@ -84,7 +84,7 @@ function generateShareText(shareData) {
   const menuName = shareData.menu_name;
 
   if (shareData.orderStatus) {
-    text = `${store_name}で${menu_name}を注文しました`;
+    return `${store_name}で${menu_name}を注文しました`;
   } else {
     return `${storeName}の${menuName}を気になるメニューとして登録しました`;
   }
