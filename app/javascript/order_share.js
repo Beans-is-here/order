@@ -1,18 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log('order_share.js が読み込まれました');
   
-  const shareButtons = document.querySelectorAll('.share-btn');
-  console.log('共有ボタンの数:', shareButtons.length);
-
- // if (!window.shareData) {
- //   console.error('window.shareDataが定義されていません');
- //   return;
- // }
+//  const shareButtons = document.querySelectorAll('.share-btn');
+//  console.log('共有ボタンの数:', shareButtons.length);
 
   shareButtons.forEach(button => {
     button.addEventListener('click', function() {
-        //動作確認
-      console.log('共有ボタンがクリックされました！');
 
       //id, token取得
       const orderId = this.dataset.orderId;
@@ -39,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         orderStatus: orderStatus
       }
 
-     //shareToX(shareUrl, orderId)
      shareToX(shareData);
     });
   });
@@ -54,7 +46,6 @@ function generateShareUrl(shareToken) {
     return shareUrl;
 }
 
-//function shareToX(shareUrl, orderId) {
 function shareToX(shareData) {
     try {
         const shareText = generateShareText(shareData);
@@ -63,15 +54,12 @@ function shareToX(shareData) {
         // textinfo
         const encodeUrl = encodeURIComponent(shareData.shareUrl);
         const hashTags = encodeURIComponent('注文履歴アプリOrder?');
-        
         const encodeText = encodeURIComponent(shareText);
-
         const xShareUrl = `https://x.com/intent/post?text=${encodeText}&url=${encodeUrl}&hashtags=${hashTags}`;
         console.log('x共有URL:', xShareUrl);
 
         //xを開く
-        window.open(xShareUrl, '_blank', 'width=550,height=420');
-
+        window.open(xShareUrl, '_blank');
         
     } catch (error) {
         console.error('共有エラー:', error);
@@ -80,12 +68,11 @@ function shareToX(shareData) {
 }
 
 function generateShareText(shareData) {
-  const storeName = shareData.store_name;
-  const menuName = shareData.menu_name;
+  const { store_name, menu_name, orderStatus } = shareData;
 
-  if (shareData.orderStatus) {
+  if (orderStatus) {
     return `${store_name}で${menu_name}を注文しました`;
   } else {
-    return `${storeName}の${menuName}を気になるメニューとして登録しました`;
+    return `${store_name}の${menu_name}を気になるメニューとして登録しました`;
   }
 }

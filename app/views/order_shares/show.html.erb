@@ -1,23 +1,14 @@
 <% content_for :head do %>
+  <!-- Twitter Cards設定 -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="<%= @share_image %>" />
+
   <!-- 基本OGP -->
   <meta property="og:title" content="<%= @share_title %>" />
   <meta property="og:description" content="<%= @share_description %>" />
   <meta property="og:url" content="<%= @share_url %>" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="<%= @share_image %>" />
-  
-  <!-- Twitter Cards設定 -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="<%= @share_title %>" />
-  <meta name="twitter:description" content="<%= @share_description %>" />
-  <meta name="twitter:image" content="<%= @share_image %>" />
-  
-  <!-- アプリ情報 -->
-  <meta property="og:site_name" content="<%= @share_title %>" />
-  
-  <!-- 画像サイズ指定 -->
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image" content="<%= @share_image %>" />  
 <% end %>
 
 
