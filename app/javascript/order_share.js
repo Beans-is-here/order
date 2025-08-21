@@ -27,13 +27,16 @@ document.addEventListener('DOMContentLoaded', function() {
       //storename, menuname取得
       const storeName = this.dataset.storeName;
       const menuName = this.dataset.menuName;
+      const orderStatus = this.dataset.orderStatus === 'true';
       console.log('StoreName:', storeName);
       console.log('MenuName:', menuName);
+      console.log('OrderStatus:', orderStatus);
 
       const shareData = {
         store_name: storeName,
         menu_name: menuName,
-        shareUrl: shareUrl
+        shareUrl: shareUrl,
+        orderStatus: orderStatus
       }
 
      //shareToX(shareUrl, orderId)
@@ -63,12 +66,7 @@ function shareToX(shareData) {
         
         const encodeText = encodeURIComponent(shareText);
 
-
-       // if (shareData.store_name) {
-       //   const text = `${shareData.store_name}の情報をチェック`;
-       // }
-
-        const xShareUrl = `https://x.com/intent/post?url=${encodeUrl}&hashtags=${hashTags}`;
+        const xShareUrl = `https://x.com/intent/post?text=${encodeText}&url=${encodeUrl}&hashtags=${hashTags}`;
         console.log('x共有URL:', xShareUrl);
 
         //xを開く
@@ -85,9 +83,9 @@ function generateShareText(shareData) {
   const storeName = shareData.store_name;
   const menuName = shareData.menu_name;
 
-//  if (data.ordered) {
-//    text = `${data.store_name}で${data.menu_name}を注文しました`;
-//  } else {
-    return `${storeName}で${menuName}を気になるメニューとして登録しました`;
-//  }
+  if (shareData.orderStatus) {
+    text = `${store_name}で${menu_name}を注文しました`;
+  } else {
+    return `${storeName}の${menuName}を気になるメニューとして登録しました`;
+  }
 }
