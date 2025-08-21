@@ -54,9 +54,14 @@ function generateShareUrl(shareToken) {
 //function shareToX(shareUrl, orderId) {
 function shareToX(shareData) {
     try {
+        const shareText = generateShareText(shareData);
+        console.log('TEXT:', shareText);
+        
         // textinfo
         const encodeUrl = encodeURIComponent(shareData.shareUrl);
         const hashTags = encodeURIComponent('注文履歴アプリOrder?');
+        
+        const encodeText = encodeURIComponent(shareText);
 
 
        // if (shareData.store_name) {
@@ -76,13 +81,13 @@ function shareToX(shareData) {
     }
 }
 
-function generateShareText(data) {
+function generateShareText(shareData) {
   const storeName = shareData.store_name;
   const menuName = shareData.menu_name;
 
 //  if (data.ordered) {
 //    text = `${data.store_name}で${data.menu_name}を注文しました`;
 //  } else {
-    text = `${storeName}で${menuName}を気になるメニューとして登録しました`;
+    return `${storeName}で${menuName}を気になるメニューとして登録しました`;
 //  }
 }
