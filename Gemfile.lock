@@ -265,6 +265,9 @@ GEM
       oauth
       omniauth (>= 1.0, < 3)
       rack (>= 1.6.2, < 4)
+    omniauth-rails_csrf_protection (1.0.2)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
@@ -416,6 +419,7 @@ DEPENDENCIES
   jsbundling-rails
   kaminari (~> 1.2.2)
   letter_opener_web (~> 2.0.0)
+  omniauth-rails_csrf_protection
   omniauth-twitter
   pg (~> 1.1)
   pry-byebug
