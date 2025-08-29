@@ -54,7 +54,8 @@ gem "carrierwave", "~>2.2.2"
 gem "kaminari", "~>1.2.2"
 gem 'fog-aws'
 gem 'dotenv-rails'
-gem 'omniauth-twitter'
+gem 'omniauth'
+gem 'omniauth-twitter2'
 gem 'omniauth-rails_csrf_protection'
 
 group :development, :test do
