@@ -5,6 +5,9 @@ ja:
         Log in: "ログインはここから"
         Sign up: "登録はここから"
         password_forgot: "パスワードをお忘れの方"
+        sign_in_with_provider: "%{provider}でログイン"
+      providers:
+        twitter2: "Twitter"
     sessions:
       new:
         sign_in_title: "ログイン"
