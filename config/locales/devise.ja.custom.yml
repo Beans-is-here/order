@@ -8,6 +8,9 @@ ja:
         sign_in_with_provider: "%{provider}でログイン"
       providers:
         twitter2: "Twitter"
+    omniauth_callbacks:
+      success: "Twitterアカウントでログインしました"
+      failure: "Twitterアカウントでのログインに失敗しました"
     sessions:
       new:
         sign_in_title: "ログイン"
