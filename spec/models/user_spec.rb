@@ -69,4 +69,74 @@ RSpec.describe User, type: :model do
       expect(user.errors).to be_empty          
     end
   end
+
+    describe 'oauthチェック' do
+      let(:auth_hash) do
+        OmniAuth::AuthHash.new({
+          provider: "twitter2",
+          uid: "12345",
+          info: {
+            name: "テスト太郎",
+            nickname: "test_taro",
+            email: "test@example.com"
+          }
+        })
+      end
+
+      context "ユーザー作成" do
+        it "ユーザーが作成される" do
+          puts "テスト前のユーザー数: #{User.count}"
+          puts "auth_hash: #{auth_hash}"
+          expect {
+            User.twitter_oauth(auth_hash)
+          }.to change(User, :count).by(1)
+        end
+
+        it "属性が正しいユーザーが作成される" do
+          user = User.twitter_oauth(auth_hash)
+          expect(user.provider).to eq "twitter2"
+          expect(user.uid).to eq "12345"
+          expect(user.username).to eq "テスト太郎"
+          expect(user.name).to eq "test_taro"
+          expect(user.email).to eq "test@example.com"
+          expect(user.password).to be_present
+        end
+      end
+
+      context "既存ユーザー" do
+        let!(:existing_user) do
+          create(:user, provider: "twitter2", uid: "12345")
+        end
+
+        it "ユーザーが作成されない" do
+          expect {
+            User.twitter_oauth(auth_hash)
+          }.not_to change(User, :count)
+        end
+
+        it "既存ユーザーが返される" do
+          user = User.twitter_oauth(auth_hash)
+          expect(user.id).to eq existing_user.id
+        end
+      end
+
+      context "Emailが存在しない" do
+        let(:auth_hash_without_email) do
+          OmniAuth::AuthHash.new({
+            provider: "twitter2",
+            uid: "12345",
+            info: {
+              name: "テスト太郎",
+              nickname: "test_taro",
+              email: nil
+            }
+          })
+        end
+
+        it "ダミーEmailが生成される" do
+          user = User.twitter_oauth(auth_hash_without_email)
+          expect(user.email).to eq "12345-twitter2@example.com"
+        end
+      end
+    end
 end
