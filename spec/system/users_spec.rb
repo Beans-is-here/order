@@ -43,7 +43,7 @@ RSpec.describe "Users", type: :system do
     end
   end
 
-  describe 'topページからindexページに遷移する' do
+  describe 'topページから各種ページに遷移する' do
     context 'ログインしている場合' do
       before do
         visit new_user_session_path
@@ -51,6 +51,14 @@ RSpec.describe "Users", type: :system do
         fill_in 'パスワード', with: user.password
         click_button 'ログインする'
         expect(page).to have_content('ログインしました。')
+      end
+
+      it 'ロゴから投稿一覧に遷移する' do
+        visit root_path
+        expect(page).to have_link('Order ロゴ')
+
+        page.execute_script("window.location.href = '#{orders_path}'")  
+        expect(current_path).to eq orders_path
       end
 
       it '投稿一覧に遷移する' do
@@ -61,11 +69,35 @@ RSpec.describe "Users", type: :system do
         page.execute_script("window.location.href = '#{orders_path}'")  
         expect(current_path).to eq orders_path
       end
+
+      it '投稿作成に遷移する' do
+        visit root_path
+        expect(page).to have_link('記録する')
+
+        page.execute_script("window.location.href = '#{new_order_path}'")
+        expect(current_path).to eq new_order_path	
+      end
     end
 
+  
     context 'ログインしていない場合' do
-      it 'ログインしていないなら登録画面' do
+      it 'ロゴから投稿一覧に遷移する' do
         visit root_path
+        expect(page).to have_link('Order ロゴ')
+
+        page.execute_script("window.location.href = '#{root_path}'")  
+        expect(current_path).to eq root_path
+      end
+      it '記録をはじめるボタンからユーザー登録' do
+        visit root_path
+        expect(page).to have_link('記録をはじめる')
+        page.execute_script("window.location.href = '#{new_user_registration_path}'")
+        expect(current_path).to eq new_user_registration_path
+      end
+
+      it 'ユーザー登録ボタンからユーザー登録' do
+        visit root_path
+        expect(page).to have_link('ユーザー登録')
         page.execute_script("window.location.href = '#{new_user_registration_path}'")
         expect(current_path).to eq new_user_registration_path
       end
