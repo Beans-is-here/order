@@ -23,6 +23,27 @@ RSpec.describe "Users", type: :system do
       expect(page).to have_content('メールアドレスまたはパスワードが違います。')
       expect(current_path).to eq new_user_session_path
     end
+
+    it 'サインアップ' do
+      visit new_user_session_path
+      expect(page).to have_link('登録はここから')
+      page.execute_script("window.location.href = '#{new_user_registration_path}'") #click_buttonとの差異を改めて確認しましょう。
+
+      expect(current_path).to eq new_user_registration_path
+    end
+
+#    it 'パスワード再発行' do
+#      visit new_user_session_path
+#      click_button 'パスワードをお忘れの方'
+#      expect(current_path).to eq new_user_password_path
+#    end
+
+#    it 'twitterでログイン' do
+#      visit new_user_session_path
+#      expect(page).to have_link("Twitterでログイン")
+#      page.execute_script("window.location.href = '#{new_user_registration_path}'")
+#      expect...
+#     end
   end
 
   describe 'ログアウト機能' do
