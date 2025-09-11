@@ -32,6 +32,6 @@ export default class TabsController extends Controller {
     })
 
     activeTab.classList.remove("bg-gray-50", "text-gray-500")
-    activeTab.classList.add("font-bold", "text-white", "bg-orange-400", "shadow")
+    activeTab.classList.add("font-bold", "text-white", "bg-orange-400", "shadow", "active")
   }
 }
