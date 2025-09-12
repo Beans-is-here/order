@@ -21,6 +21,46 @@ RSpec.describe "Orders", type: :system do
     visit orders_path
   end
 
+  describe 'newアクション' do
+    it "新規ページが作成される" do
+      visit new_order_path
+      expect(page).to have_field('ordered_true', type: 'radio')
+      expect(page).to have_field('ordered_false', type: 'radio')
+
+      expect(page).to have_field("order_form[store_name]")
+      expect(page).to have_field("order_form[menu_name]")
+      expect(page).to have_select("order_form[review_rating]")
+      expect(page).to have_field("order_form[memo]")
+      expect(page).to have_field("order_form[menu_image_url]", type: 'file')
+      expect(page).to have_button("記録する")
+    end
+
+    it "ラジオボタンのデフォルトが設定されているか。" do
+      visit new_order_path
+      expect(page).to have_checked_field('ordered_true')
+      expect(page).not_to have_checked_field('ordered_false')
+    end
+
+    it "ラジオボタンの切り替えが正常に動作するか" do
+      visit new_order_path
+      expect(page).to have_checked_field('ordered_true')
+
+      choose 'ordered_false'
+      expect(page).to have_checked_field('ordered_false')
+      expect(page).not_to have_checked_field('ordered_true')
+
+      choose 'ordered_true'
+      expect(page).to have_checked_field('ordered_true')
+      expect(page).not_to have_checked_field('ordered_false')
+    end
+
+    it "ラジオボタンのラベルが正常に表示されているか" do
+      visit new_order_path
+      expect(page).to have_content('オーダー済みメニューとして記録')
+      expect(page).to have_content('気になるメニューとして記録')
+    end
+  end
+
   describe 'タブ機能' do
     it '"すべて"が機能している' do
 
