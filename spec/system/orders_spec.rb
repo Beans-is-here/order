@@ -61,6 +61,45 @@ RSpec.describe "Orders", type: :system do
     end
   end
 
+  describe 'create' do
+    it "'オーダー済み'として記録できる", js: true do
+      visit new_order_path
+      fill_in 'order_form[store_name]', with: '店舗テスト'
+      fill_in 'order_form[menu_name]', with: 'メニューテスト'
+      choose 'ordered_true'
+  
+  # ファイルアップロードが必須の場合
+  # attach_file 'order_form[menu_image_url]', Rails.root.join('spec/fixtures/test_image.jpg')
+  
+      expect {
+        click_button '記録する'
+        expect(page).to have_current_path(orders_path)
+      }.to change(Order, :count).by(1)
+
+      order = Order.last
+      expect(order.menu.store.name).to eq('店舗テスト')
+      expect(order.menu.name).to eq('メニューテスト')
+      expect(order.ordered).to be true
+    end
+
+    it "'気になるメニュー'として記録できる", js: true do
+      visit new_order_path
+      fill_in 'order_form[store_name]', with: '店舗テスト2'
+      fill_in 'order_form[menu_name]', with: 'メニューテスト2'
+      choose 'ordered_false'
+
+      expect {
+        click_button '記録する'
+        expect(page).to have_current_path(orders_path)
+      }.to change(Order, :count).by(1)
+
+      order = Order.last
+      expect(order.menu.store.name).to eq('店舗テスト2')
+      expect(order.menu.name).to eq('メニューテスト2')
+      expect(order.ordered).to be false
+    end
+  end
+
   describe 'タブ機能' do
     it '"すべて"が機能している' do
 
