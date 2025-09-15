@@ -21,6 +21,32 @@ RSpec.describe "Orders", type: :system do
     visit orders_path
   end
 
+  describe "editページ遷移", js: true do  
+    it "注文済みメニュー編集ページ" do
+      expect(page).to have_css('#order-list')
+
+      within("#order_#{ordered_order.id}") do
+        click_link href: edit_order_path(ordered_order)
+      end
+
+      expect(page).to have_current_path(edit_order_path(ordered_order))
+      expect(current_url).to include(ordered_order.id.to_s)  
+      expect(current_url).not_to include(wanted_order.id.to_s)
+    end
+
+    it "気になるメニュー編集ページ" do
+      expect(page).to have_css('#order-list')
+
+      within("#order_#{wanted_order.id}") do
+        click_link href: edit_order_path(wanted_order)
+      end
+
+      expect(page).to have_current_path(edit_order_path(wanted_order))
+      expect(current_url).to include(wanted_order.id.to_s)  
+      expect(current_url).not_to include(ordered_order.id.to_s)
+    end
+  end
+
   describe 'newアクション' do
     it "新規ページが作成される" do
       visit new_order_path
@@ -100,7 +126,7 @@ RSpec.describe "Orders", type: :system do
     end
   end
 
-  describe 'タブ機能' do
+  describe 'index タブ機能' do
     it '"すべて"が機能している' do
 
       expect(page).to have_css('.tab-button.active', text: 'すべて')
@@ -126,4 +152,6 @@ RSpec.describe "Orders", type: :system do
       expect(page).to have_content(wanted_order.menu.name)
     end
   end
+
+
 end
