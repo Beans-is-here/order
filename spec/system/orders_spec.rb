@@ -47,6 +47,38 @@ RSpec.describe "Orders", type: :system do
     end
   end
 
+  describe "updateアクション", js: true do
+    it "注文済みメニュー更新" do
+      visit edit_order_path(ordered_order)
+      fill_in 'order_form[store_name]', with: 'Ordered_店舗編集'
+      fill_in 'order_form[menu_name]', with: 'Ordered_メニュー編集'
+      choose 'ordered_true'
+    
+      click_button '記録する'
+      expect(page).to have_current_path(orders_path)
+      #timestamp
+      ordered_order.reload
+      expect(ordered_order.menu.store.name).to eq('Ordered_店舗編集')
+      expect(ordered_order.menu.name).to eq('Ordered_メニュー編集')
+      expect(ordered_order.ordered).to be true
+    end
+
+    it "気になるメニュー更新" do
+      visit edit_order_path(wanted_order)
+      fill_in 'order_form[store_name]', with: 'Wanted_店舗編集'
+      fill_in 'order_form[menu_name]', with: 'Wanted_メニュー編集'
+      choose 'ordered_false'
+    
+      click_button '記録する'
+      expect(page).to have_current_path(orders_path)
+      #timestamp
+      wanted_order.reload
+      expect(wanted_order.menu.store.name).to eq('Wanted_店舗編集')
+      expect(wanted_order.menu.name).to eq('Wanted_メニュー編集')
+      expect(wanted_order.ordered).to be false
+    end
+  end
+  
   describe 'newアクション' do
     it "新規ページが作成される" do
       visit new_order_path
