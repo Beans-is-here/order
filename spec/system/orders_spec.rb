@@ -78,6 +78,26 @@ RSpec.describe "Orders", type: :system do
       expect(wanted_order.ordered).to be false
     end
   end
+
+  describe "destroyアクション", js: true do
+    it "オーダー済みが削除できるか" do
+      expect(page).to have_css("#order_#{ordered_order.id}")
+      puts "削除対象: Order ID #{ordered_order.id}"
+
+      within("#order_#{ordered_order.id}") do
+        expect {
+          accept_confirm { click_link href: order_path(ordered_order) }
+          expect(page).not_to have_css("#order_#{ordered_order.id}")
+        }.to change(Order, :count).by(-1)
+          .and change { Order.exists?(ordered_order.id) }.from(true).to(false)
+      end
+
+      expect(page).to have_css("#order_#{wanted_order.id}")
+      expect(Order.exists?(wanted_order.id)).to be true
+      expect(page).to have_current_path(orders_path)
+      expect { ordered_order.reload }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
   
   describe 'newアクション' do
     it "新規ページが作成される" do
@@ -184,6 +204,4 @@ RSpec.describe "Orders", type: :system do
       expect(page).to have_content(wanted_order.menu.name)
     end
   end
-
-
 end
