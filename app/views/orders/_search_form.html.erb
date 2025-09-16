@@ -1,10 +1,16 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mt-6">
-  <%= form_with url: orders_path(tab: @tab, sort: @sort), method: :get, scope: :search, data: { turbo_frame: "order-list" }, class: "flex items-center p-2 border rounded space-x-4 border-gray-400 bg-gray-50" do |f| %>
+  <%= form_with url: orders_path(tab: @tab, sort: @sort), method: :get, scope: :search, 
+      data: { turbo_frame: "order-list" }, 
+      class: "flex items-center p-2 border rounded space-x-4 border-gray-400 bg-gray-50" do |f| %>
 
     <div class="relative flex-1" data-controller="autocomplete" data-autocomplete-url-value="/orders/autocomplete" role="combobox">
       <!-- キーワード入力欄 -->
-      <%= f.text_field :keyword, placeholder: "店舗名またはメニュー名", value: params.dig(:search, :keyword), class: "flex-1 border rounded p-2 w-32 sm:w-48",
-      data: { autocomplete_target: "input" } %>  
+      <%= f.text_field :keyword,
+          placeholder: "店舗名またはメニュー名",
+          value: params.dig(:search, :keyword), 
+          class: "flex-1 border rounded border-gray-400 bg-gray-50 p-2 w-full",
+          data: { autocomplete_target: "input" } %>
+
         <%= hidden_field_tag :tab, params[:tab] || "all" %>  <!-- ← この行を追加 -->
 
       <%# autocompleteはinputイベント発生時に自動的に検索してくれる %>
