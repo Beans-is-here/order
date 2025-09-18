@@ -1,3 +1,20 @@
-<!-- app/views/shared/_footer.html.erb -->
-  <footer class="bg-orange-100 shadow px-14 py-4 h-25">
-  </footer>
+<footer class="bg-gradient-to-r from-orange-50 to-amber-50 border-t border-orange-200 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+      <!-- ブランド -->
+      <div class="flex items-center space-x-2">
+        <%= image_tag "icon.png", alt: "Order ロゴ", class: "h-6 w-auto" %>
+      </div>
+
+      <!-- リンク -->
+      <div class="flex items-center space-x-6 text-sm">
+        <a href="https://www.kiyac.app/privacypolicy/znousYEtpanqI5FY66vV" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="text-gray-600 hover:text-amber-600 transition-colors">
+          プライバシーポリシー
+        </a>
+        <span class="text-gray-400">&copy; 2025 Order?</span>
+      </div>
+    </div>
+  </div>
