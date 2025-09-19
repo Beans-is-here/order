@@ -13,8 +13,7 @@
     </h1>
 
     <div class="flex flex-wrap gap-2 sm:gap-3 items-center justify-end">
-      <% common_btn_class = "bg-amber-500 text-white font-medium border border-white/40 rounded hover:bg-amber-400 transition py-2 px-3 sm:py-2.5 sm:px-5 text-sm whitespace-nowrap" %>
-
+      <% common_btn_class = "bg-amber-500 text-white font-medium border border-white/40 rounded-lg hover:bg-amber-400 transition py-2 px-3 sm:py-2.5 sm:px-5 text-sm whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500" %>
       <% if user_signed_in? %>
         <%= link_to t("header.record"), new_order_path, class: common_btn_class %>
 
