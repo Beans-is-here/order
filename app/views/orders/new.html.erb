@@ -1,10 +1,22 @@
-<div class="w-full max-w-lg mx-auto">
-  <div class="bg-orange-50 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-<!-- <div class="w-full max-w-md sm:max-w-lg lg:max-w-2xl mx-auto"> -->
-    <h2 class="text-3xl font-bold mt-6 text-center"><%= t("オーダーの記録") %></h2>
-      <%= render 'form', order: @order %>
-    <div class="text-lg underline py-2 mb-2 text-center">
-      <%= link_to t('戻る'), orders_path %>
+<div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md mx-auto">
+    <!-- ヘッダーセクション -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-semibold text-gray-900 mb-2">
+        <%= t("オーダーを記録") %>
+      </h2>
+    </div>
+
+    <!-- フォームカード -->
+    <div class="bg-white shadow-2xl rounded-2xl overflow-hidden">
+      <div class="px-8 py-8">
+      
+
+        <%= render 'form', order: @order %>
+        <div class="text-lg underline py-2 mb-2 text-center">
+          <%= link_to t('戻る'), orders_path %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
