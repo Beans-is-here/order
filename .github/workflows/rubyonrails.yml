@@ -34,7 +34,6 @@ jobs:
         with:
           ruby-version: 3.3.6
           bundler-cache: true
-          cache-version: 1
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
@@ -53,7 +52,6 @@ jobs:
         with:
           ruby-version: 3.3.6
           bundler-cache: true
-          cache-version: 1
 #      - name: Generate binstubs
 #        run: bundle binstubs bundler-audit brakeman rubocop
       # Add or replace any other lints here
