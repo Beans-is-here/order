@@ -1,10 +1,15 @@
+# This workflow uses actions that are not certified by GitHub.  They are
+# provided by a third-party and are governed by separate terms of service,
+# privacy policy, and support documentation.
+#
+# This workflow will install a prebuilt Ruby version, install dependencies, and
+# run tests and linters.
 name: "Ruby on Rails CI"
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
 jobs:
   test:
     runs-on: ubuntu-22.04
@@ -17,46 +22,42 @@ jobs:
           POSTGRES_DB: rails_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      # Add or replace dependency steps here
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1 # v1.179.1
         with:
           ruby-version: 3.3.6
           bundler-cache: true
+      # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
+      # Add or replace test runners here
       - name: Run tests
+        #run: bin/rake
         run: bundle exec rspec
 
-  # セキュリティツールは一旦コメントアウト
   lint:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1 # v1.179.1
         with:
           ruby-version: 3.3.6
           bundler-cache: true
-      # デバッグ用：インストールされたgemを確認
-      - name: Debug - List installed gems
-        run: |
-          bundle list
-          echo "--- Checking for bundler-audit ---"
-          bundle list | grep bundler-audit || echo "bundler-audit not found"
-          echo "--- Checking for brakeman ---"
-          bundle list | grep brakeman || echo "brakeman not found"
-      # RuboCopのみ実行（動作確認）
+      - name: Generate binstubs
+        run: bundle binstubs bundler-audit brakeman rubocop
+      # Add or replace any other lints here
+      - name: Security audit dependencies
+        run: bin/bundler-audit --update
+      - name: Security audit application code
+        run: bin/brakeman -q -w2
       - name: Lint Ruby files
-        run: bundle exec rubocop --parallel
+        run: bin/rubocop --parallel
