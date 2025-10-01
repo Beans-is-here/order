@@ -64,6 +64,7 @@ gem 'factory_bot_rails'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem 'bundler-audit'
 end
 
 group :development do
@@ -71,7 +72,6 @@ group :development do
   gem "web-console"
   gem 'pry-byebug'
   gem 'letter_opener_web', "~>2.0.0"
-  gem 'bundler-audit'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
