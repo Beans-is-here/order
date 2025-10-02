@@ -25,7 +25,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   # config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-   config.mailer_sender = ENV['GMAIL_USERNAME']
+  config.mailer_sender = ENV.fetch('GMAIL_USERNAME', nil)
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -274,11 +274,11 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-#  config.omniauth :twitter2, ENV['CLIENT_ID'], ENV['CLIENT_SECRET'], callback_url: ENV['TWITTER_CALLBACK']
-config.omniauth :twitter2, ENV['CLIENT_ID'], ENV['CLIENT_SECRET'], {
-  callback_url: ENV['TWITTER_CALLBACK'],
-  scope: 'tweet.read users.read offline.access'
-}
+  #  config.omniauth :twitter2, ENV['CLIENT_ID'], ENV['CLIENT_SECRET'], callback_url: ENV['TWITTER_CALLBACK']
+  config.omniauth :twitter2, ENV.fetch('CLIENT_ID', nil), ENV.fetch('CLIENT_SECRET', nil), {
+    callback_url: ENV.fetch('TWITTER_CALLBACK', nil),
+    scope: 'tweet.read users.read offline.access'
+  }
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
