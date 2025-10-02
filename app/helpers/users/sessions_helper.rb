@@ -1,2 +1,4 @@
-module Users::SessionsHelper
+module Users
+  module SessionsHelper
+  end
 end

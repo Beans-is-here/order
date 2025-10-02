@@ -1,5 +1,5 @@
 class OrderSharesController < ApplicationController
-#  skip_before_action :require_login, only: [:show]
+  #  skip_before_action :require_login, only: [:show]
 
   def show
     @order = Order.find_by(share_token: params[:token])
@@ -11,8 +11,8 @@ class OrderSharesController < ApplicationController
     @share_image = build_share_image
     @share_url = request.original_url
 
-  # デバッグ用ログ
-    Rails.logger.info "=== OGP Debug ==="
+    # デバッグ用ログ
+    Rails.logger.info '=== OGP Debug ==='
     Rails.logger.info "Title: #{@share_title}"
     Rails.logger.info "Description: #{@share_description}"
     Rails.logger.info "Image: #{@share_image}"
@@ -20,9 +20,9 @@ class OrderSharesController < ApplicationController
   end
 
   private
-  
+
   def build_share_title
-    "Order?"
+    'Order?'
   end
 
   def build_share_description

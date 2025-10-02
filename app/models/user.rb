@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
   validates :email, uniqueness: true
-  
+
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]+\z/
   validates :password,
             format: {
@@ -28,12 +28,11 @@ class User < ApplicationRecord
       user.username = auth.info.name
       user.name = auth.info.nickname
 
-      user.email = auth.info.email.present? ? auth.info.email : dummy_email(auth)
+      user.email = (auth.info.email.presence || dummy_email(auth))
       user.password = Devise.friendly_token[0, 20]
     end
   end
 
-  private
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
   end

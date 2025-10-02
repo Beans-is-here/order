@@ -8,24 +8,24 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-#user = User.find_or_create_by!(email: 'test@example.com') do |u|
+# user = User.find_or_create_by!(email: 'test@example.com') do |u|
 #  u.name = "TESTuser"
 #  u.password = 'password'
 #  u.password_confirmation = 'password'
-#end
+# end
 #
-#store = Store.find_or_create_by!(name: 'TESTお店', user: user)
+# store = Store.find_or_create_by!(name: 'TESTお店', user: user)
 #
-#menus = []
-#5.times do |i|
+# menus = []
+# 5.times do |i|
 #  menu = Menu.create(
 #    name: "メニュー#{1 + i}",
 #    store: store
 #  )
 #  menus << menu
-#end
+# end
 #
-#menus.each_with_index do |menu, i|
+# menus.each_with_index do |menu, i|
 #  Order.create!(
 #    user: user,
 #    menu: menu,
@@ -33,9 +33,9 @@
 #    ordered: i.even?,
 #    ordered_at: Time.current - i.days
 #  )
-#end
+# end
 
-user = User.find_or_create_by!(email: 'guest@example.com') do |user|
-  user.name = "ゲストユーザー"
+User.find_or_create_by!(email: 'guest@example.com') do |user|
+  user.name = 'ゲストユーザー'
   user.password = 'Guest0Password'
 end

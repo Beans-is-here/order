@@ -2,7 +2,7 @@ class OrderForm
   include ActiveModel::Model
   include ActiveModel::Attributes
   extend CarrierWave::Mount
-  
+
   mount_uploader :menu_image_url, MenuImageUploader
 
   attribute :ordered, :boolean
@@ -17,9 +17,10 @@ class OrderForm
 
   attr_reader :user
   attr_accessor :order
+
   delegate :persisted?, to: :order, allow_nil: true
 
-  def initialize(attributes = nil, user:, order: nil )
+  def initialize(attributes = nil, user:, order: nil)
     @user = user
     @order = order
     attributes ||= default_attributes
@@ -27,33 +28,34 @@ class OrderForm
   end
 
   def save
-    puts "=== saveメソッド開始 ==="
-    puts "valid?の結果: #{valid?}"
+    Rails.logger.debug '=== saveメソッド開始 ==='
+    Rails.logger.debug { "valid?の結果: #{valid?}" }
     return false unless valid?
-    puts "=== transaction開始 ==="
-    
-    ActiveRecord::Base.transaction do
-      puts "=== Store作成開始 ==="
-      puts "store_name: #{store_name.inspect}"
 
-      begin        
-      store = Store.find_or_create_by!(name: store_name, user: user)
-      puts "Store作成完了: #{store.id}"
-    rescue => e
-        puts "Store作成エラー: #{e.message}"
-        raise e  # エラーを再発生させる
+    Rails.logger.debug '=== transaction開始 ==='
+
+    ActiveRecord::Base.transaction do
+      Rails.logger.debug '=== Store作成開始 ==='
+      Rails.logger.debug { "store_name: #{store_name.inspect}" }
+
+      begin
+        store = Store.find_or_create_by!(name: store_name, user: user)
+        Rails.logger.debug { "Store作成完了: #{store.id}" }
+      rescue StandardError => e
+        Rails.logger.debug { "Store作成エラー: #{e.message}" }
+        raise e # エラーを再発生させる
       end
       menu = Menu.create!(
         name: menu_name,
         image_url: menu_image_url,
         store: store
       )
-      puts "=== 画像デバッグ ==="
-      puts "menu_image_url: #{menu_image_url.inspect}"
-      puts "menu_image_url.present?: #{menu_image_url.present?}"
-      puts "menu_image_url.class: #{menu_image_url.class}"
-      puts "=== mount_uploaderが使えるか ==="
-      puts "respond_to mount_uploader: #{respond_to?(:mount_uploader)}"
+      Rails.logger.debug '=== 画像デバッグ ==='
+      Rails.logger.debug { "menu_image_url: #{menu_image_url.inspect}" }
+      Rails.logger.debug { "menu_image_url.present?: #{menu_image_url.present?}" }
+      Rails.logger.debug { "menu_image_url.class: #{menu_image_url.class}" }
+      Rails.logger.debug '=== mount_uploaderが使えるか ==='
+      Rails.logger.debug { "respond_to mount_uploader: #{respond_to?(:mount_uploader)}" }
       @order = user.orders.create!(
         menu: menu,
         memo: memo,
@@ -63,9 +65,9 @@ class OrderForm
 
       if review_rating.present?
         menu.reviews.create!(
-          user: user, 
+          user: user,
           rating: review_rating
-          )
+        )
       end
     end
 
@@ -78,22 +80,22 @@ class OrderForm
   end
 
   def update
-    puts "=== updateメソッド開始 ==="
-    puts "valid?の結果: #{valid?}"
+    Rails.logger.debug '=== updateメソッド開始 ==='
+    Rails.logger.debug { "valid?の結果: #{valid?}" }
     return false unless valid?
 
-    puts "=== transaction開始 ==="
+    Rails.logger.debug '=== transaction開始 ==='
     ActiveRecord::Base.transaction do
-      puts "=== Store作成開始 ==="
-      puts "store_name: #{store_name.inspect}"
-      
+      Rails.logger.debug '=== Store作成開始 ==='
+      Rails.logger.debug { "store_name: #{store_name.inspect}" }
+
       store = Store.find_or_create_by!(name: store_name, user: user)
       menu = order.menu
       menu.update!(
-        name: menu_name, 
+        name: menu_name,
         image_url: menu_image_url,
         store: store
-        )
+      )
 
       order.update!(
         memo: memo,
@@ -114,8 +116,10 @@ class OrderForm
   end
 
   private
+
   def default_attributes
     return {} unless order
+
     {
       ordered: order.ordered,
       store_name: order.menu.store.name,
