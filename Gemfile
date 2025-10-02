@@ -3,7 +3,8 @@ source "https://rubygems.org"
 ruby "3.3.6"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.5", ">= 7.1.5.1"
+#gem "rails", "~> 7.1.5", ">= 7.1.5.1"
+gem 'rails', '~> 7.2.0'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -50,7 +51,8 @@ gem "bootsnap", require: false
 gem "devise"
 gem "devise-i18n"
 gem "rails-i18n", "~>7.0.0"
-gem "carrierwave", "~>2.2.2"
+#gem "carrierwave", "~>2.2.2"
+gem 'carrierwave', '~> 3.0'
 gem "kaminari", "~>1.2.2"
 gem 'fog-aws'
 gem 'dotenv-rails'
