@@ -7,7 +7,7 @@ class Menu < ApplicationRecord
 
   has_many :orders, dependent: :destroy
   has_many :reviews, dependent: :destroy
-  has_many :menu_categories
+  has_many :menu_categories, dependent: :destroy
   has_many :categories, through: :menu_categories
   belongs_to :store
 
