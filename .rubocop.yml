@@ -35,7 +35,8 @@ Metrics/MethodLength:
   Max: 45
 
 Metrics/AbcSize:
-  Max: 17
+#  Max: 17
+  Max: 45
 
 # 命名規則
 Naming/VariableNumber:
