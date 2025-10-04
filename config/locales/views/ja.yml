@@ -20,6 +20,8 @@ ja:
     sign_up: ユーザー登録
     record: 記録する
   orders:
+    flash_message:
+      status_updated: 'オーダー済みに更新しました'
     new:
       as_ordered_menu: "オーダー済みメニューとして記録"
       as_interested_menu: "気になるメニューとして記録"

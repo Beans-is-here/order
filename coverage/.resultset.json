@@ -777,6 +777,8 @@
           null,
           null,
           null,
+          null,
+          null,
           null
         ]
       },
@@ -1120,13 +1122,17 @@
           21,
           null,
           null,
-          21,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           21,
-          null,
           0,
-          null,
-          0,
+          21,
           null,
           null,
           21,
@@ -1516,8 +1522,17 @@
           null,
           null
         ]
+      },
+      "/myapp/app/models/recommendation.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1759414109
+    "timestamp": 1759540610
   }
 }

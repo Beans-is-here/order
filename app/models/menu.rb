@@ -5,8 +5,8 @@ class Menu < ApplicationRecord
   validates :name, presence: true
   # validates :store_id, presence: true
 
-  has_many :orders
-  has_many :reviews
+  has_many :orders, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_many :menu_categories
   has_many :categories, through: :menu_categories
   belongs_to :store
