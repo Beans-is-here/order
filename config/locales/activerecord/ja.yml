@@ -9,3 +9,16 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              invalid_format: 'は半角英小文字、大文字、数字を含めてください'
+  flash:
+    sessions:
+      guest_sign_in:
+        success: 'ゲストユーザーとしてログインしました'
+    orders:
+      update_status:
+        success: 'オーダー済みに更新しました'

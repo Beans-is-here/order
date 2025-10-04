@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :password,
             format: {
               with: VALID_PASSWORD_REGEX,
-              message: 'は半角英小文字、大文字、数字を含めてください'
+              message: :invalid_format
             },
             if: -> { password.present? }
 

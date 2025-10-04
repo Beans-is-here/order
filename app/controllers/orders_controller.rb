@@ -105,13 +105,13 @@ class OrdersController < ApplicationController
     @order.update!(ordered: true, ordered_at: Time.current)
 
     # flash.nowからformat.turbo_stream?　要確認!!
-    flash.now[:notice] = 'オーダー済みに更新しました'
+    flash.now[:notice] = t('flash.orders.update_status.success')
 
     # 気になったタブからのステータス変更用
     respond_to do |format|
       # update_status.turbo_streamをレンダリング
       format.turbo_stream
-      format.html { redirect_to orders_path(tab: 'ordered'), notice: 'オーダー済みに更新しました' }
+      format.html { redirect_to orders_path(tab: 'ordered'), notice: t('flash.orders.update_status.success') }
     end
   end
 
