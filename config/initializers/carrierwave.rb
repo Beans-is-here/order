@@ -5,7 +5,7 @@ require 'carrierwave/storage/fog'
 CarrierWave.configure do |config|
   case Rails.env
   when 'production'
-  # config.storage :fog
+    # config.storage :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory = ENV.fetch('AWS_BUCKET_NAME', nil)
     config.fog_public = false # trueにするとURLから誰でも見られる。
@@ -19,7 +19,7 @@ CarrierWave.configure do |config|
   when 'test'
     config.storage = :file
     config.enable_processing = false
-    config.root = Rails.root.join('tmp', 'test_uploads')
+    config.root = Rails.root.join('tmp/test_uploads')
   else
     config.storage = :file
   end
