@@ -28,11 +28,7 @@ class OrderForm
   end
 
   def save
-    Rails.logger.debug '=== saveメソッド開始 ==='
-    Rails.logger.debug { "valid?の結果: #{valid?}" }
     return false unless valid?
-
-    Rails.logger.debug '=== transaction開始 ==='
 
     ActiveRecord::Base.transaction do
       Rails.logger.debug '=== Store作成開始 ==='
@@ -50,12 +46,6 @@ class OrderForm
         image_url: menu_image_url,
         store: store
       )
-      Rails.logger.debug '=== 画像デバッグ ==='
-      Rails.logger.debug { "menu_image_url: #{menu_image_url.inspect}" }
-      Rails.logger.debug { "menu_image_url.present?: #{menu_image_url.present?}" }
-      Rails.logger.debug { "menu_image_url.class: #{menu_image_url.class}" }
-      Rails.logger.debug '=== mount_uploaderが使えるか ==='
-      Rails.logger.debug { "respond_to mount_uploader: #{respond_to?(:mount_uploader)}" }
       @order = user.orders.create!(
         menu: menu,
         memo: memo,
