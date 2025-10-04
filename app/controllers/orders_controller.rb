@@ -28,14 +28,18 @@ class OrdersController < ApplicationController
     @count_ordered = @orders.where(ordered: true).count
     @count_wanted = @orders.where(ordered: false).count
 
-    # sort
+# sort
+#    @orders = case @sort
+#              when 'latest'
+#                @orders.latest
+#              when 'old'
+#                @orders.old
+#              else
+#                @orders.latest
+#              end
     @orders = case @sort
-              when 'latest'
-                @orders.latest
-              when 'old'
-                @orders.old
-              else
-                @orders.latest
+              when 'old' then @orders.old
+              else @orders.latest
               end
 
     @orders = @orders.page(params[:page])
