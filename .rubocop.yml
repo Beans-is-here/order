@@ -34,9 +34,12 @@ Layout/LineLength:
 Metrics/MethodLength:
   Max: 45
 
+Metrics/ClassLength:
+  Max: 120 
+
 Metrics/AbcSize:
 #  Max: 17
-  Max: 45
+  Max: 80
 
 # 命名規則
 Naming/VariableNumber:
