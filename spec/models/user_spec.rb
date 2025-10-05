@@ -87,6 +87,8 @@ RSpec.describe User, type: :model do
       it 'ユーザーが作成される' do
         puts "テスト前のユーザー数: #{User.count}"
         puts "auth_hash: #{auth_hash}"
+        expect(User.find_by(uid: '12345', provider: 'twitter2')).to be_nil
+
         expect do
           User.twitter_oauth(auth_hash)
         end.to change(User, :count).by(1)
