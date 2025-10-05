@@ -316,7 +316,7 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-#  OmniAuth.config.allowed_request_methods = %i[get post]
-#  OmniAuth.config.silence_get_warning = true
-  OmniAuth.config.request_validation_phase = nil
+  OmniAuth.config.allowed_request_methods = %i[get post] # getも許可
+  OmniAuth.config.silence_get_warning = true # getリクエスト時の警告を無効
+  OmniAuth.config.request_validation_phase = nil # omniauth 2.0とomniauth-rails_csrf_protectionの競合回避
 end
