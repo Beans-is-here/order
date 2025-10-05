@@ -320,7 +320,5 @@ Devise.setup do |config|
   OmniAuth.config.silence_get_warning = true
 
 # 開発環境では一時的に内部保護を無効化（gem側で保護される）
-  if Rails.env.development?
-    OmniAuth.config.request_validation_phase = nil
-  end
+  OmniAuth.config.request_validation_phase = nil
 end
