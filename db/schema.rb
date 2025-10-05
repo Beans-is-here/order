@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_29_124048) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_05_094152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,7 +80,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_29_124048) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name_normalized"
-    t.index ["name_normalized"], name: "index_stores_on_name_normalized", unique: true
+    t.index ["name_normalized", "user_id"], name: "index_stores_on_name_normalized_and_user_id", unique: true
     t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
