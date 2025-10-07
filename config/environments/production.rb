@@ -104,8 +104,8 @@ Rails.application.configure do
     port: 587,
 #    domain: 'order-27ds.onrender.com',
     domain: 'gmail.com',
-    user_name: ENV.fetch('GMAIL_USERNAME', nil),
-    password: ENV.fetch('GMAIL_PASSWORD', nil),
+    user_name: ENV.fetch('GMAIL_USERNAME'),
+    password: ENV.fetch('GMAIL_PASSWORD'),
     authentication: :plain,
     enable_starttls_auto: true
   }
