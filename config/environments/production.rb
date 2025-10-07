@@ -110,8 +110,6 @@ Rails.application.configure do
     enable_starttls_auto: true
 
     # Render特有の対策
-    open_timeout: 120,           # ← 大幅にタイムアウト延長
-    read_timeout: 120,           # ← 読み取りタイムアウトも延長
     ssl: false,                  # ← SSL明示的無効化
     tls: true,                   # ← TLS明示的有効化
     openssl_verify_mode: 'none'  # ← SSL証明書検証無効化
