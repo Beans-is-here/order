@@ -6,9 +6,10 @@
   <%= link_to t("devise.shared.links.Sign up"), new_registration_path(resource_name) %><br />
 <% end %>
 
-<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to t("devise.shared.links.password_forgot"), new_password_path(resource_name) %><br />
-<% end %>
+<!-- renderの仕様変更によりエラーが出力されるようになったため、一旦コメントアウト -->
+<!-- <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %> -->
+<!--  <%= link_to t("devise.shared.links.password_forgot"), new_password_path(resource_name) %><br /> -->
+<!-- <% end %> -->
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />

@@ -96,23 +96,16 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  config.action_mailer.default_url_options = { host: 'order-27ds.onrender.com', protocol: 'https' }
+  config.action_mailer.default_url_options = { host: 'order-27ds.onrender.com' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     port: 587,
-#    domain: 'order-27ds.onrender.com',
-    domain: 'gmail.com',
+    domain: 'order-27ds.onrender.com',
     user_name: ENV.fetch('GMAIL_USERNAME'),
     password: ENV.fetch('GMAIL_PASSWORD'),
     authentication: :plain,
-    enable_starttls_auto: true,
-    # Render特有の対策
-    open_timeout: 120,           # ← 大幅にタイムアウト延長
-    read_timeout: 120,           # ← 読み取りタイムアウトも延長
-    ssl: false,                  # ← SSL明示的無効化
-    tls: true,                   # ← TLS明示的有効化
-    openssl_verify_mode: 'none'  # ← SSL証明書検証無効化
+    enable_starttls_auto: true
   }
 end
