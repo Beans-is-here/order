@@ -32,7 +32,7 @@ Order?は外食を頻繁にする30~40代男性向けに、過去の注文履歴
 - 店名, メニューによる履歴検索
 - OAuthログイン
 - Xへのシェア機能
-~~- パスワードリセット機能~~ メンテナンス中
+- ~~パスワードリセット機能~~　メンテナンス中
 - レコメンド通知
 - 登録情報編集、削除
   
@@ -48,21 +48,48 @@ Order?は外食を頻繁にする30~40代男性向けに、過去の注文履歴
 - **データベース**: PostgreSQL 15
 - **フロントエンド**: Tailwind CSS
 - **インフラ**: Docker / Render
-- **メール機能**: ActionMailer 7/11 SMTP Gmail
+- **メール機能**: ActionMailer SMTP Gmail
+
+## CI/CDツール
+- GitHub Actions
 
 ### 使用Gem
 
+#### 認証
 - `devise` - 認証機能
-- `geocoder` - 位置情報取得 => 当該サービスの目的から外れるのではないかと考え、破棄。
+- `devise-i18n` - devise国際化対応
+- `omniauth` (~> 2.0) - 
+- `omniauth-rails_csrf_protection` - CSRF脆弱性 CVE-2015-9284の対応
+- `omniauth-twitter2` - xのomniauth機能を追加
+
+#### 国際化, UI
 - `rails-i18n` (~> 7.0.0) - 国際化対応
-- `draper` (4.0.2) - デコレーター
-- `carrierwave` (2.2.2) - 画像アップロード
 - `turbo-rails` (1.1.1) - Turbo対応
 - `kaminari` (1.2.2) - ページネーション
-- `ransack` (3.2.1) - 検索機能 => form objectで対応
+
+### ファイルアップロード
+- `carrierwave` (~> 3.0) - 画像アップロード
+- `fog-aws` - S3への画像アップロード
+
+### dev, test
+- `dotenv-rails` - 環境変数管理
 - `letter_opener_web` (2.0.0) - メール確認用
-- `config` (4.0.0) - アプリケーション設定
-- `pry-byebug`（開発用）
-- `MiniMagick` - 画像生成
-- 'fog-aws' - 画像アップロード
-- 'dotenv-rails' - 画像アップロードテスト
+- `pry-byebug`（開発用）- デバッグツール
+- `factory_bot_rails`　- テストデータ生成
+- `rspec-rails` - テストフレームワーク
+- `debug` - Rails標準デバッグツール
+- `web-console` - ブラウザ上でのデバッグ
+  
+#### 品質管理
+- `brakeman` - セキュリティ脆弱性検査
+- `bundler-audit` - Gem脆弱性チェック
+- `rubocop` - コード品質チェック
+- `rubocop-performance` - パフォーマンス最適化チェック
+- `rubocop-rails` - Rails特有のコード品質チェック
+- `rubocop-rspec` - RSpec用コード品質チェック
+
+#### テスト関連
+- `capybara` - 統合テスト
+- `selenium-webdriver` - ブラウザ自動操作
+- `simplecov` - テストカバレッジ測定
+- `webdrivers` - webDriverの自動管理
