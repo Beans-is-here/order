@@ -7,10 +7,10 @@ ja:
         password_forgot: "パスワードをお忘れの方"
         sign_in_with_provider: "%{provider}でログイン"
       providers:
-        twitter2: "Twitter"
+        twitter2: "X"
     omniauth_callbacks:
-      success: "Twitterアカウントでログインしました"
-      failure: "Twitterアカウントでのログインに失敗しました"
+      success: "Xアカウントでログインしました"
+      failure: "Xアカウントでのログインに失敗しました"
     sessions:
       new:
         sign_in_title: "ログイン"
