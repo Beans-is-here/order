@@ -53,6 +53,9 @@ Order?は外食を頻繁にする30~40代男性向けに、過去の注文履歴
 ## CI/CDツール
 - GitHub Actions
 
+## ER図
+<img width="988" height="762" alt="Image" src="https://github.com/user-attachments/assets/048fa9bc-db2f-4260-bcae-fe6f05b18894" />
+
 ### 使用Gem
 
 #### 認証
