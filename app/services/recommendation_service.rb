@@ -20,3 +20,4 @@ class RecommendationService
     # 配列からランダムに抽出
   end
 end
+

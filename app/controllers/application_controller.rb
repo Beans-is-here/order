@@ -44,3 +44,4 @@ end
 # この処理は実行されない
 # end
 # session[:recommendation_id] は nil のまま
+
