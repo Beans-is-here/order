@@ -22,18 +22,46 @@ class User < ApplicationRecord
   has_many :recommendations, dependent: :destroy
 
   def self.twitter_oauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.username = auth.info.name
-      user.name = auth.info.nickname
+    user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+    user.username = auth.info.name
+    user.name = auth.info.nickname
+    user.email = auth.info.email.presence || dummy_email(auth)
 
-      user.email = (auth.info.email.presence || dummy_email(auth))
-      user.password = Devise.friendly_token[0, 20]
+    if user.new_record?
+      user.password = generate_strong_password
+      user.password_confirmation = user.password if user.respond_to?(:password_confirmation=)
     end
+
+    user.save!
+    user
   end
 
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
+  end
+
+  # ダミーパスワード生成
+  require 'securerandom'
+  private_class_method def self.generate_strong_password(length = 6)
+    raise ArgumentError, 'length must be >= 6' if length < 6
+
+    lower = ('a'..'z').to_a
+    upper = ('A'..'Z').to_a
+    digits = ('0'..'9').to_a
+    all = lower + upper + digits
+
+    # 必須文字を1つずつ選ぶ
+    chars = []
+    chars << lower[SecureRandom.random_number(lower.length)]
+    chars << upper[SecureRandom.random_number(upper.length)]
+    chars << digits[SecureRandom.random_number(digits.length)]
+
+    # 残りは全体からランダムに選択
+    (length - 3).times do
+      chars << all[SecureRandom.random_number(all.length)]
+    end
+
+    # 文字列をシャッフルして返す
+    chars.shuffle.join
   end
 end
