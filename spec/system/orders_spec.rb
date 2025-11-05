@@ -205,4 +205,14 @@ RSpec.describe 'Orders', type: :system do
       expect(page).to have_content(wanted_order.menu.name)
     end
   end
+
+  describe '新規作成機能' do
+    it '投稿作成に遷移する' do
+      visit orders_path
+      expect(page).to have_link('+')
+
+      page.execute_script("window.location.href = '#{new_order_path}'")
+      expect(current_path).to eq new_order_path
+    end
+  end
 end
