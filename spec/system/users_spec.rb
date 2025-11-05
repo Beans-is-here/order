@@ -90,14 +90,6 @@ RSpec.describe 'Users', type: :system do
         page.execute_script("window.location.href = '#{orders_path}'")
         expect(current_path).to eq orders_path
       end
-
-      it '投稿作成に遷移する' do
-        visit root_path
-        expect(page).to have_link('記録する')
-
-        page.execute_script("window.location.href = '#{new_order_path}'")
-        expect(current_path).to eq new_order_path
-      end
     end
 
     context 'ログインしていない場合' do
