@@ -21,6 +21,8 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :recommendations, dependent: :destroy
 
+  enum role: { general: 0, admin: 1 }
+
   def self.twitter_oauth(auth)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
     user.username = auth.info.name
