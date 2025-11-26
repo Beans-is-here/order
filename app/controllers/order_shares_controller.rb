@@ -30,6 +30,6 @@ class OrderSharesController < ApplicationController
   end
 
   def build_share_image
-    ActionController::Base.helpers.asset_url('icon.png')
+    ActionController::Base.helpers.asset_url(@order.menu.image_url_url.present? ? @order.menu.image_url.url : 'sample.png', host: request.base_url)
   end
 end
