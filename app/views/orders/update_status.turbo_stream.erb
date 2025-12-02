@@ -5,6 +5,16 @@
     <%= render partial: "orders/card", locals: { order: @order } %>
   <% end %>
 <% end %>
+
+<%= turbo_stream.update "order-count" do %>
+  <% if @tab == "all" %>
+    <%= @count_all %>件
+  <% elsif @tab == "ordered" %>
+    <%= @count_ordered %>件
+  <% else %>
+    <%= @count_wanted %>件
+  <% end %>
+<% end %>
 <!-- DOM更新命令がHTMLレスポンスとしてクライアントに返る -->
 <%= turbo_stream.update "flash" do %>
   <%= render "shared/flash_messages" %>
