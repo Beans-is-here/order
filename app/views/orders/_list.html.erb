@@ -1,13 +1,15 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mt-2">
   <div class="text-gray-500 space-y-4 border rounded transition bg-gray-50 p-2 flex justify-between border-gray-400">
-<!-- count -->
-<% if @tab == "all" %>
-  <%= @count_all %>件
-<% elsif @tab == "ordered" %>
-  <%= @count_ordered %>件
-<% else %>
-  <%= @count_wanted %>件
-<% end %>
+    <div id="order-count">
+    <!-- count -->
+      <% if @tab == "all" %>
+        <%= @count_all %>件
+      <% elsif @tab == "ordered" %>
+        <%= @count_ordered %>件
+      <% else %>
+        <%= @count_wanted %>件
+      <% end %>
+    </div>
 
 <div>
 <!-- _search_form.html.erb の下などに記載 -->

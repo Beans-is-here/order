@@ -103,6 +103,10 @@ class OrdersController < ApplicationController
   def update_status
     @order = current_user.orders.find(params[:id])
     @order.update!(ordered: true, ordered_at: Time.current)
+    # 再計算
+    @count_all = current_user.orders.count
+    @count_ordered = current_user.orders.where(ordered: true).count
+    @count_wanted = current_user.orders.where(ordered: false).count
 
     # flash.nowからformat.turbo_stream?　要確認!!
     flash.now[:notice] = t('flash.orders.update_status.success')
