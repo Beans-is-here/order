@@ -61,11 +61,8 @@ gem 'kaminari', '~>1.2.2'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-twitter2'
-
-gem 'factory_bot_rails'
-gem 'rspec-rails'
-
 gem 'rack', '>= 3.2.3'
+gem 'activeadmin', '~> 3.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -96,6 +93,8 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'webdrivers'

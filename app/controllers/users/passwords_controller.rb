@@ -19,13 +19,13 @@ module Users
 
       if email.blank?
         resource.errors.add(:email, :blank)
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
         return
       end
 
       unless email.match?(URI::MailTo::EMAIL_REGEXP)
         resource.errors.add(:email, :invalid)
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
         return
       end
       # a@a など不正な値に対するバリデーショnAエラーも今後入れたい。
