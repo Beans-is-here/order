@@ -96,7 +96,7 @@ class OrdersController < ApplicationController
                   success: t('defaults.flash_message.created', item: Order.model_name.human)
     else
       flash.now[:danger] = t('defaults.flash_message.not_created', item: Order.model_name.human) # 'を入力してください'
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
