@@ -5,6 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[twitter2]
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[id name email created_at updated_at]
+  end
+  
+  def self.ransackable_associations(auth_object = nil)
+    %w[orders recommendations reviews]
+  end
+
   validates :name, presence: true
   validates :email, presence: true
   validates :email, uniqueness: true

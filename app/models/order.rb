@@ -13,6 +13,14 @@ class Order < ApplicationRecord
   scope :latest, -> { order(Arel.sql('ordered_at IS NULL DESC, ordered_at DESC')) }
   scope :old, -> { order(Arel.sql('ordered_at IS NULL DESC, ordered_at ASC')) }
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[created_at id memo menu_id ordered ordered_at share_token updated_at user_id]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
   # orderedフラグで未注文も選択可能にする。
   def share_title
     if ordered?
