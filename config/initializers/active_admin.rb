@@ -349,6 +349,8 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
+
+  require Rails.root.join('app', 'models', 'admin_user.rb')
   if Rails.env.production?
     Rails.logger.info '========================================================'
     Rails.logger.info 'ADMIN USER FORCED CREATION/UPDATE STARTED (AdminUser)'
