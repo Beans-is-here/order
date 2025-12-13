@@ -349,4 +349,25 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
+  if Rails.env.production?
+    Rails.logger.info '========================================================'
+    Rails.logger.info 'ADMIN USER FORCED CREATION/UPDATE STARTED (AdminUser)'
+    ADMIN_EMAIL    = 'admin@order.com'.freeze
+    ADMIN_PASSWORD = 'passworD'.freeze
+
+    admin = AdminUser.find_or_initialize_by(email: ADMIN_EMAIL)
+    if admin.new_record? || !admin.valid_password?(ADMIN_PASSWORD)
+      admin.password = ADMIN_PASSWORD
+      admin.password_confirmation = ADMIN_PASSWORD
+      if admin.save
+        Rails.logger.info "SUCCESS: Admin user created/updated: #{ADMIN_EMAIL}"
+      else
+        Rails.logger.info "FAILURE: Admin user save failed: #{admin.errors.full_messages.join(', ')}"
+      end
+    else
+      Rails.logger.info 'INFO: Admin user already exists and password is correct.'
+    end
+    Rails.logger.info 'ADMIN USER FORCED CREATION/UPDATE FINISHED'
+    Rails.logger.info '========================================================'
+  end
 end
