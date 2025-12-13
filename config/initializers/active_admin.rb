@@ -350,27 +350,24 @@ ActiveAdmin.setup do |config|
   #
   # config.use_webpacker = true
   if Rails.env.production?
-  puts "========================================================"
-  puts "ADMIN USER FORCED CREATION/UPDATE STARTED (AdminUser)"
-  
-  ADMIN_EMAIL    = 'admin@order.com'
-  ADMIN_PASSWORD = 'passworD' # 💡 ステップ 1で設定した新しいパスワード
+    Rails.logger.info '========================================================'
+    Rails.logger.info 'ADMIN USER FORCED CREATION/UPDATE STARTED (AdminUser)'
+    ADMIN_EMAIL    = 'admin@order.com'.freeze
+    ADMIN_PASSWORD = 'passworD'.freeze
 
-  admin = AdminUser.find_or_initialize_by(email: ADMIN_EMAIL)
-  
-  if admin.new_record? || !admin.valid_password?(ADMIN_PASSWORD)
-    admin.password = ADMIN_PASSWORD
-    admin.password_confirmation = ADMIN_PASSWORD
-    
-    if admin.save
-      puts "SUCCESS: Admin user created/updated: #{ADMIN_EMAIL}"
+    admin = AdminUser.find_or_initialize_by(email: ADMIN_EMAIL)
+    if admin.new_record? || !admin.valid_password?(ADMIN_PASSWORD)
+      admin.password = ADMIN_PASSWORD
+      admin.password_confirmation = ADMIN_PASSWORD
+      if admin.save
+        Rails.logger.info "SUCCESS: Admin user created/updated: #{ADMIN_EMAIL}"
+      else
+        Rails.logger.info "FAILURE: Admin user save failed: #{admin.errors.full_messages.join(', ')}"
+      end
     else
-      puts "FAILURE: Admin user save failed: #{admin.errors.full_messages.join(', ')}"
+      Rails.logger.info 'INFO: Admin user already exists and password is correct.'
     end
-  else
-    puts "INFO: Admin user already exists and password is correct."
+    Rails.logger.info 'ADMIN USER FORCED CREATION/UPDATE FINISHED'
+    Rails.logger.info '========================================================'
   end
-
-  puts "ADMIN USER FORCED CREATION/UPDATE FINISHED"
-  puts "========================================================"
 end
