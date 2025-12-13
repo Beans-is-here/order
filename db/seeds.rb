@@ -39,4 +39,4 @@ User.find_or_create_by!(email: 'guest@example.com') do |user|
   user.name = 'ゲストユーザー'
   user.password = 'Guest0Password'
 end
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') unless AdminUser.exists?
+AdminUser.create!(email: 'admin@order.com', password: 'passworD', password_confirmation: 'passworD') unless AdminUser.exists?
