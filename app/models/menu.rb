@@ -11,6 +11,14 @@ class Menu < ApplicationRecord
   has_many :categories, through: :menu_categories
   belongs_to :store
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at id name image_url ordered_at share_token updated_at store_id]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    []
+  end
+
   private
 
   def normalize_name
