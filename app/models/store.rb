@@ -6,6 +6,14 @@ class Store < ApplicationRecord
   has_many :menus, dependent: :destroy
   has_many :recommendations, dependent: :destroy
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at id name ordered ordered_at share_token updated_at user_id]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    []
+  end
+
   private
 
   def normalize_name
