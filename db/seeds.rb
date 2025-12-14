@@ -39,7 +39,6 @@ User.find_or_create_by!(email: 'guest@example.com') do |user|
   user.name = 'ゲストユーザー'
   user.password = 'Guest0Password'
 end
-#AdminUser.create!(email: 'admin@order.com', password: 'passworD', password_confirmation: 'passworD') unless AdminUser.exists?
 
 # 環境変数から管理者情報を取得。未設定の場合はデフォルト値を使用
 admin_email = ENV.fetch('ADMIN_EMAIL', 'admin@order.com')
@@ -50,10 +49,8 @@ if admin_password.present?
   AdminUser.find_or_create_by!(email: admin_email) do |admin|
     admin.password = admin_password
     admin.password_confirmation = admin_password
-    # Devise の :confirmable を使用している場合は、ここで confirmed_at も設定
-    # admin.confirmed_at = Time.current
   end
-  puts "AdminUser created/found: #{admin_email}"
+  Rails.logger.info "AdminUser created/found: #{admin_email}"
 else
-  puts "WARNING: ADMIN_PASSWORD environment variable is missing, skipping AdminUser creation."
+  Rails.logger.info 'WARNING: ADMIN_PASSWORD environment variable is missing, skipping AdminUser creation.'
 end
